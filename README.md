@@ -12,12 +12,19 @@
  ### *Software :*
  - [Python 3.6](https://www.python.org/downloads/) (minimum)
  - [PyCharm IDE](https://www.jetbrains.com/pycharm/) (preferably)
+ - [Chrome WebDriver](https://chromedriver.storage.googleapis.com/index.html?path=73.0.3683.20/)
  - Python Packages :
-   - [Geocoder](https://geocoder.readthedocs.io/)
+   - [Selenium](https://www.seleniumhq.org/)
    - [PubNub Python SDK](https://www.pubnub.com/docs/python/pubnub-python-sdk)
    - [Matplotlib](https://matplotlib.org/users/installing.html)
   
-Geocoder is used to acquire the `Latitude` and `Longititude` from the python script.
+ ### *Installing Chrome WebDriver :* 
+ - Download the webdriver from the link above.
+ - Place it in the project directory.
+ - Give the path of WebDriver.exe file to the environment variables - system variable - PATH. Append the location at the end of PATH.
+
+ 
+Selenium is used to access chrome - go to Google Maps - Sign In - hit the location button - zoom in - extract co-ordinates from it.
 
 PubNub service is the online MQTT broker for handling the messages between the two devices. 
 Access the [PubNub account](https://admin.pubnub.com/#/user/485567/account/485527/app/35264197/key/541883/) for authentication keys.
