@@ -24,7 +24,7 @@ while True:
 
     # Publishing to the PubNub Service:
     envelope = pubnub.publish().channel("ESIoT").message(locData).sync()
-    print("publish timetoken: %d" % envelope.result.timetoken)
+    print("publish timetoken: {0}".format(envelope.result.timetoken))
 
     print("Sent !")
     print("______")
