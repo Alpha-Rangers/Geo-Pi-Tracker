@@ -3,12 +3,9 @@ from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub, SubscribeListener
 import numpy as np
 import matplotlib.pyplot as plt
-import geocoder
 
 # Getting the lat-long:
-g = geocoder.ip('me')
-my_lat = g.latlng[0]
-my_long = g.latlng[1]
+
 
 # Configuring the PubNub connection:
 pnconfig = PNConfiguration()
@@ -41,5 +38,4 @@ while True:
     print("Received LAT : {0}".format(result_lat))
     print("Received LONG : {0}".format(result_long))
     print("______")
-    print("My Location : {0} {1}".format(my_lat, my_long))
 
