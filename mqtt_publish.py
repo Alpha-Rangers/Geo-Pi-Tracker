@@ -1,7 +1,6 @@
 # Necessary libraries and packages:
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
-import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
@@ -79,7 +78,7 @@ while True:
     envelope = pubnub.publish().channel("ESIoT").message(locData).sync()
     print("publish timetoken: {0}".format(envelope.result.timetoken))
 
-    print("Sent !")
+    print("Sent : {0}".format(locData))
     print("______")
 
     # Setting time interval to 1 sec.
