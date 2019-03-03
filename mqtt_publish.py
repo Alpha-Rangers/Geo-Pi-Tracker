@@ -61,6 +61,8 @@ pnconfig.subscribe_key = "sub-c-f739ed7a-2afb-11e9-8c30-16f8bea0bbad"
 pnconfig.ssl = False
 pubnub = PubNub(pnconfig)
 
+envelope = pubnub.publish().channel("ESIoT").message("Connected !").sync()
+
 # Making the script run continuously
 while True:
 
@@ -82,6 +84,6 @@ while True:
     print("______")
 
     # Setting time interval to 1 sec.
-    time.sleep(1)
+    time.sleep(5)
 
 
