@@ -5,8 +5,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
 import math
-import numpy as np
+import numpy
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from matplotlib.animation import FuncAnimation
 
 # defining constants to calculate the distance:
 radius = 6371000
@@ -82,6 +84,25 @@ my_listener.wait_for_connect()
 print('Subscriber Configured !')
 print('_______________________')
 
+i = 1
+
+fig = plt.figure()
+plt.xlim(-10, 10)
+plt.ylim(-10, 10)
+
+plt.xlabel("Distance")
+plt.ylabel("Distance")
+plt.title("Location of the other Device.")
+xdata, ydata = [], []
+graph, = plt.plot([], [], '-')
+
+def animate(x, y):
+    xdata.append(x)
+    ydata.append(y)
+    graph.set_data(xdata, ydata)
+    return graph
+
+
 # Making the script run continuously
 while True:
 
@@ -99,6 +120,7 @@ while True:
         print("_______________________________________________________")
 
     else:
+
         # Filtering the lat-long from received message:
         result_loc = result_message.split('_')
         result_lat = float(result_loc[0][1:])
@@ -130,3 +152,7 @@ while True:
         print("Distance = {0} meters.".format(d))
         print("_______________________")
 
+        ani = FuncAnimation(fig, animate(i, i), frames=10, interval=200)
+        i = i + 1
+        plt.draw()
+        plt.pause(0.1)
