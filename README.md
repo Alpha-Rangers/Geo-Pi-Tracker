@@ -30,3 +30,5 @@ PubNub service is the online MQTT broker for handling the messages between the t
 Access the [PubNub account](https://admin.pubnub.com/#/user/485567/account/485527/app/35264197/key/541883/) for authentication keys.
 
 Matplotlib will be used to plot the real-time location of the second Raspi on the graph.
+
+The [Haversine Formula] (http://www.movable-type.co.uk/scripts/latlong.html) is used to calculate the distance between the two points in meters.

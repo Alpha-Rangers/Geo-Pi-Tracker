@@ -120,7 +120,7 @@ while True:
         # c = 2 ⋅ atan2( √a, √(1−a) )                       ---Calculation.
         # d = Radius ⋅ c                                    ---Distance.
         #
-        # Here, φ is latitude, λ is longitude
+        # [ Here, φ is latitude, λ is longitude ]
 
         a = math.pow(math.sin(relative_lat * p), 2) + \
             math.cos(result_lat * p) * math.cos(url_lat) * math.pow(math.sin(relative_long * p), 2)
