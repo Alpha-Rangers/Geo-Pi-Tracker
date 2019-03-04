@@ -10,9 +10,10 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.animation import FuncAnimation
 
-# defining constants to calculate the distance:
+# defining constants:
 radius = 6371000
 p = 0.017453292519943295
+latdata, longdata = [], []
 
 # Getting the lat-long:
 chrome_options = Options()
@@ -92,7 +93,7 @@ plt.ylim(-20, 20)
 
 plt.xlabel("Distance Units")
 plt.ylabel("Distance Units")
-plt.title("Trajectory of the other Device.")
+plt.title("Trajectory of the other Device:")
 xdata, ydata = [], []
 graph, = plt.plot([], [], '-')
 
@@ -133,6 +134,9 @@ while True:
         # Calculating relative co-ordinates:
         relative_lat = result_lat - url_lat
         relative_long = result_long - url_long
+        
+        latdata.append(relative_lat)
+        longdata.append(relative_long)
 
         # Calculating distance between two points using 'Haversine Formula'.
         # This formula calculates the distance "As a crow flies", which is the
