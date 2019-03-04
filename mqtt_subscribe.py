@@ -144,8 +144,8 @@ while True:
         #
         # [ Here, φ is latitude, λ is longitude ]
 
-        a = math.pow(math.sin(relative_lat * p), 2) + \
-            math.cos(result_lat * p) * math.cos(url_lat) * math.pow(math.sin(relative_long * p), 2)
+        a = math.pow(math.sin((relative_lat/2) * p), 2) + \
+            math.cos(result_lat * p) * math.cos(url_lat) * math.pow(math.sin((relative_long/2) * p), 2)
         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
         d = radius * c
 
