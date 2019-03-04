@@ -87,12 +87,12 @@ print('_______________________')
 i = 1
 
 fig = plt.figure()
-plt.xlim(-10, 10)
-plt.ylim(-10, 10)
+plt.xlim(-20, 20)
+plt.ylim(-20, 20)
 
-plt.xlabel("Distance")
-plt.ylabel("Distance")
-plt.title("Location of the other Device.")
+plt.xlabel("Distance Units")
+plt.ylabel("Distance Units")
+plt.title("Trajectory of the other Device.")
 xdata, ydata = [], []
 graph, = plt.plot([], [], '-')
 
