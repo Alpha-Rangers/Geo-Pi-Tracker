@@ -7,13 +7,11 @@ import time
 import math
 import numpy
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 from matplotlib.animation import FuncAnimation
 
-# defining constants:
+# defining constants to calculate the distance:
 radius = 6371000
 p = 0.017453292519943295
-latdata, longdata = [], []
 
 # Getting the lat-long:
 chrome_options = Options()
@@ -21,42 +19,60 @@ driver = webdriver.Chrome()
 driver.set_window_size(500, 500)
 print("Setting up the Subscriber .... ")
 
-
 # Opening Google maps
 driver.get("https://google.co.in/maps")
-time.sleep(15)
 print("Accessing Google Map Service .... ")
 
 # Signing in
-sign_in = driver.find_element_by_id('gb_70')
+while True:
+    try:
+        sign_in = driver.find_element_by_id('gb_70')
+        break
+    except Exception:
+        time.sleep(0.1)
+        continue
 sign_in.click()
-time.sleep(10)
 
-username = driver.find_element_by_id('identifierId')
-username.send_keys("sudhanshu1k")
-next_button = driver.find_element_by_xpath('//*[@id="identifierNext"]/content/span')
+while True:
+    try:
+        username = driver.find_element_by_id('identifierId')
+        username.send_keys("sudhanshu1k")
+
+        next_button = driver.find_element_by_xpath('//*[@id="identifierNext"]/content/span')
+    except Exception:
+        time.sleep(0.1)
+        continue
 next_button.click()
-time.sleep(2)
-print("Determining the co-ordinates .... ")
 
-password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
-password.send_keys("krinkhold13")
-after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span')
+while True:
+    try:
+        password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
+        password.send_keys("krinkhold13")
+
+        after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span')
+    except Exception:
+        time.sleep(0.1)
+        continue
 after_pass.click()
-time.sleep(10)
 
+print("Determining the co-ordinates .... ")
 # Getting the location:
-location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
+while True:
+    try:
+        location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
+    except Exception:
+        time.sleep(0.1)
+        continue
 location_button.click()
-print("Triangulating the position .... ")
 
+print("Triangulating the position .... ")
 # Zooming in:
 time.sleep(5)
 zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
 
 for i in range(5):
-        zoom_button.click()
-        time.sleep(2)
+    zoom_button.click()
+    time.sleep(2)
 
 print(driver.current_url)
 
@@ -90,12 +106,16 @@ i = 1
 fig = plt.figure()
 plt.xlim(-20, 20)
 plt.ylim(-20, 20)
+plt.axhline(y=0, color='r')
+plt.axvline(x=0, color='r')
 
 plt.xlabel("Distance Units")
 plt.ylabel("Distance Units")
-plt.title("Trajectory of the other Device:")
+plt.title("Trajectory of the other Device.")
 xdata, ydata = [], []
+latdata, longdata = [], []
 graph, = plt.plot([], [], '-')
+
 
 def animate(x, y):
     xdata.append(x)
@@ -134,7 +154,7 @@ while True:
         # Calculating relative co-ordinates:
         relative_lat = result_lat - url_lat
         relative_long = result_long - url_long
-        
+
         latdata.append(relative_lat)
         longdata.append(relative_long)
 
@@ -148,9 +168,9 @@ while True:
         #
         # [ Here, φ is latitude, λ is longitude ]
 
-        a = math.pow(math.sin((relative_lat/2) * p), 2) + \
-            math.cos(result_lat * p) * math.cos(url_lat) * math.pow(math.sin((relative_long/2) * p), 2)
-        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+        a = math.pow(math.sin((relative_lat / 2) * p), 2) + \
+            math.cos(result_lat * p) * math.cos(url_lat) * math.pow(math.sin((relative_long / 2) * p), 2)
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
         d = radius * c
 
         print("Distance = {0} meters.".format(d))
@@ -160,3 +180,4 @@ while True:
         i = i + 1
         plt.draw()
         plt.pause(0.1)
+
