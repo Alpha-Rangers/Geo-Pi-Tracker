@@ -12,6 +12,7 @@ from matplotlib.animation import FuncAnimation
 # defining constants to calculate the distance:
 radius = 6371000
 p = 0.017453292519943295
+latdata, longdata = [], []
 
 # Getting the lat-long:
 chrome_options = Options()
@@ -19,11 +20,11 @@ driver = webdriver.Chrome()
 driver.set_window_size(500, 500)
 print("Setting up the Subscriber .... ")
 
-# Opening Google maps
+# Opening Google maps:
 driver.get("https://google.co.in/maps")
-print("Accessing Google Map Service .... ")
+print("Accessing Google Map Services .... ")
 
-# Signing in
+# Signing in:
 while True:
     try:
         sign_in = driver.find_element_by_id('gb_70')
@@ -33,23 +34,27 @@ while True:
         continue
 sign_in.click()
 
+# Entering credentials:
 while True:
     try:
         username = driver.find_element_by_id('identifierId')
         username.send_keys("sudhanshu1k")
 
         next_button = driver.find_element_by_xpath('//*[@id="identifierNext"]/content/span')
+        break
     except Exception:
         time.sleep(0.1)
         continue
 next_button.click()
 
+# Entering Password:
 while True:
     try:
         password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
         password.send_keys("krinkhold13")
 
         after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span')
+        break
     except Exception:
         time.sleep(0.1)
         continue
@@ -60,16 +65,22 @@ print("Determining the co-ordinates .... ")
 while True:
     try:
         location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
+        break
     except Exception:
         time.sleep(0.1)
         continue
 location_button.click()
 
-print("Triangulating the position .... ")
+print("Trangulating the location .... ")
 # Zooming in:
-time.sleep(5)
-zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
-
+while True:
+    try:
+        zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
+        break
+    except Exception:
+        time.sleep(0.1)
+        continue
+        
 for i in range(5):
     zoom_button.click()
     time.sleep(2)
@@ -113,7 +124,6 @@ plt.xlabel("Distance Units")
 plt.ylabel("Distance Units")
 plt.title("Trajectory of the other Device.")
 xdata, ydata = [], []
-latdata, longdata = [], []
 graph, = plt.plot([], [], '-')
 
 
