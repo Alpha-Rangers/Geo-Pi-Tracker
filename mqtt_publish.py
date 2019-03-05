@@ -12,32 +12,63 @@ driver.set_window_size(500, 500)
 
 # Opening Google maps
 driver.get("https://google.co.in/maps")
-time.sleep(15)
 
-# Signing in
-sign_in = driver.find_element_by_id('gb_70')
+# Signing in:
+while True:
+    try:
+        sign_in = driver.find_element_by_id('gb_70')
+        break
+    except Exception:
+        time.sleep(0.1)
+        continue
 sign_in.click()
-time.sleep(10)
 
-username = driver.find_element_by_id('identifierId')
-username.send_keys("sudhanshu1k")
-next_button = driver.find_element_by_xpath('//*[@id="identifierNext"]/content/span')
+# Entering credentials:
+while True:
+    try:
+        username = driver.find_element_by_id('identifierId')
+        username.send_keys("sudhanshu1k")
+
+        next_button = driver.find_element_by_xpath('//*[@id="identifierNext"]/content/span')
+        break
+    except Exception:
+        time.sleep(0.1)
+        continue
 next_button.click()
-time.sleep(2)
 
-password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
-password.send_keys("krinkhold13")
-after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span')
+
+# Entering Password:
+while True:
+    try:
+        password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
+        password.send_keys("krinkhold13")
+
+        after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span')
+        break
+    except Exception:
+        time.sleep(0.1)
+        continue
 after_pass.click()
-time.sleep(10)
 
 # Getting the location
-location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
+# Getting the location:
+while True:
+    try:
+        location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
+        break
+    except Exception:
+        time.sleep(0.1)
+        continue
 location_button.click()
 
 # Zooming in
-time.sleep(5)
-zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
+while True:
+    try:
+        zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
+        break
+    except Exception:
+        time.sleep(0.1)
+continue
 
 for i in range(5):
         zoom_button.click()
