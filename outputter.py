@@ -57,23 +57,15 @@ def check_quadrant(x: int, y: int) -> int:
 def set_edges(q: int):
     if q == 1:
         output[3, 0] = 1
-        output[2, 0] = 1
-        output[3, 1] = 1
 
     elif q == 2:
         output[3, 3] = 1
-        output[2, 3] = 1
-        output[3, 2] = 1
 
     elif q == 3:
         output[0, 3] = 1
-        output[0, 2] = 1
-        output[1, 3] = 1
 
     elif q == 4:
         output[0, 0] = 1
-        output[0, 1] = 1
-        output[1, 0] = 1
 
 
 # Defining the exact position of LED:
