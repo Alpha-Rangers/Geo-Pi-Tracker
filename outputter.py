@@ -11,7 +11,7 @@ def generate_output(x: int, y: int):
     quadrant = check_quadrant(x, y)
 
     print('Quadrant : {0}'.format(quadrant))
-    set_edges(quadrant)
+    x_origin, y_origin = set_edges(quadrant)
 
     x = abs(x)
     y = abs(y)
@@ -32,11 +32,12 @@ def generate_output(x: int, y: int):
 
     print('LED Index : {0}, {1}'.format(x_index, y_index))
     print('______________________')
-    set_blinker(x_index, y_index, quadrant)
+    x_led, y_led = set_blinker(x_index, y_index, quadrant)
     print(output)
     print('______________________')
     print('1 = Blinking LEDs denoting the Origin.')
     print('8 = Actual bright LED.')
+    ouput_to_grid(x_origin, y_origin, x_led, y_led)
 
 
 # Dedicated to check the quadrant in which the point lies:
@@ -57,32 +58,44 @@ def check_quadrant(x: int, y: int) -> int:
 def set_edges(q: int):
     if q == 1:
         output[3, 0] = 1
+        return 3, 0
 
     elif q == 2:
         output[3, 3] = 1
-
+        return 3, 3
+    
     elif q == 3:
         output[0, 3] = 1
-
+        return 0, 3
+        
     elif q == 4:
         output[0, 0] = 1
+        return 0, 0
 
-
+    
 # Defining the exact position of LED:
 def set_blinker(x: int, y: int, q: int):
     if q == 1:
         output[3-y, x] = 8
-
+        return 3-y, x
+    
     elif q == 2:
         output[3-y, 3-x] = 8
+        return 3-y, 3-x
 
     elif q == 3:
         output[y, 3-x] = 8
+        return y, 3-x
 
     elif q == 4:
         output[y, x] = 8
-
-
+        return y, x
+    
+        
+def output_to_grid(x_origin, y_origin, x_led, y_led):
+    
+    
+    
 # Manipulate the values here:
 generate_output(100, 100)
 
