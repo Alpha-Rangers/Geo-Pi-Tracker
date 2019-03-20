@@ -7,6 +7,8 @@ import numpy
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+from outputter import generate_output
+
 # defining constants to calculate the distance:
 radius = 6371000
 p = 0.017453292519943295
@@ -104,6 +106,8 @@ while True:
         print("_______________________")
 
         ani = FuncAnimation(fig, animate(relative_long, relative_lat), frames=10, interval=200)
-        i = i + 1
         plt.draw()
         plt.pause(0.1)
+        
+        generate_output(relative_long, relative_lat)
+        
