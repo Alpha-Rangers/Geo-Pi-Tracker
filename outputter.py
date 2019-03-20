@@ -18,13 +18,13 @@ def generate_output(x: int, y: int):
     x_index = -1
     y_index = -1
 
-    for i in range(0, 600, 150):
+    for i in range(0, 1000, 2500):
         if x < i:
             break
         else:
             x_index = x_index + 1
 
-    for i in range(0, 600, 150):
+    for i in range(0, 1000, 2500):
         if y < i:
             break
         else:
