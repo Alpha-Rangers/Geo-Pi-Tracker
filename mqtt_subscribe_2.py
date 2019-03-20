@@ -32,13 +32,13 @@ print('_______________________')
 i = 1
 
 fig = plt.figure()
-plt.xlim(-500, 500)
-plt.ylim(-500, 500)
+plt.xlim(-600, 600)
+plt.ylim(-600, 600)
 plt.axhline(y=0, color='r')
 plt.axvline(x=0, color='r')
 
-plt.xlabel("Distance Units")
-plt.ylabel("Distance Units")
+plt.xlabel("Distance Units (meters)")
+plt.ylabel("Distance Units (meters)")
 plt.title("Trajectory of the other Device.")
 xdata, ydata = [], []
 graph, = plt.plot([], [], '-')
