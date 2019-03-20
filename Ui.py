@@ -62,7 +62,8 @@ def generate_ui(status,rl,rlo,d):
     z1 = Label(root, textvariable=var4, font=("Helvetica", 10), bg="white")
     z1.place(x=1020, y=250, width=120, height=25)
     var7.set(d)
-
+    graphFrame = LabelFrame(root, height = 500, width = 800, text = "Trajectory Covered")
+    graphFrame.place(x=350,y=300)
 
 generate_ui(30,40,50,60)
 root.mainloop()
