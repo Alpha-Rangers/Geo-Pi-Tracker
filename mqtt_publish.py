@@ -31,9 +31,11 @@ while True:
 
         next_button = driver.find_element_by_xpath('//*[@id="identifierNext"]/content/span')
         break
+
     except Exception:
         time.sleep(0.1)
         continue
+
 next_button.click()
 
 
@@ -43,11 +45,13 @@ while True:
         password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
         password.send_keys("krinkhold13")
 
-        after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span')
+        after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content')
         break
+
     except Exception:
         time.sleep(0.1)
         continue
+
 after_pass.click()
 
 # Getting the location
@@ -68,7 +72,7 @@ while True:
         break
     except Exception:
         time.sleep(0.1)
-continue
+        continue
 
 for i in range(5):
         zoom_button.click()

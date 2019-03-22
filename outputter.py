@@ -92,10 +92,9 @@ def set_blinker(x: int, y: int, q: int):
         return y, x
     
         
-def output_to_grid(x_origin, y_origin, x_led, y_led):
+# def output_to_grid(x_origin, y_origin, x_led, y_led):
     
-    
-    
+
 # Manipulate the values here:
 generate_output(100, 100)
 

@@ -17,7 +17,7 @@ latdata, longdata = [], []
 # Getting the lat-long:
 chrome_options = Options()
 driver = webdriver.Chrome()
-driver.set_window_size(500, 500)
+driver.set_window_size(700, 700)
 print("Setting up the Subscriber .... ")
 
 # Opening Google maps:
@@ -53,7 +53,7 @@ while True:
         password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
         password.send_keys("krinkhold13")
 
-        after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content/span')
+        after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]')
         break
     except Exception:
         time.sleep(0.1)
@@ -186,7 +186,7 @@ while True:
         print("Distance = {0} meters.".format(d))
         print("_______________________")
 
-        ani = FuncAnimation(fig, animate(i, i), frames=10, interval=200)
+        ani = FuncAnimation(fig, animate(i, i+1), frames=10, interval=200)
         i = i + 1
         plt.draw()
         plt.pause(0.1)
