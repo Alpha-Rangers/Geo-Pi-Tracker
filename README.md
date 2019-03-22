@@ -1,4 +1,4 @@
-# Live-Tracker
+# Geo-Pi Tracker
 **ESIoT Project.**
 
 ###### Track one Raspberry Pi with another one and display its trajectory as well as relative location.
