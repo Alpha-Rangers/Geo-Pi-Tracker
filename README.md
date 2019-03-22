@@ -31,4 +31,4 @@ Access the [PubNub account](https://admin.pubnub.com/#/user/485567/account/48552
 
 Matplotlib will be used to plot the real-time location of the second Raspi on the graph.
 
-The [Haversine Formula] (http://www.movable-type.co.uk/scripts/latlong.html) is used to calculate the distance between the two points in meters.
+The [Haversine Formula](http://www.movable-type.co.uk/scripts/latlong.html) is used to calculate the distance between the two points in meters.
