@@ -2,9 +2,11 @@ import RPi.GPIO as GPIO
 import time
 import numpy as np
 
+# Setting up GPIO:
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+# Configuring output pins:
 GPIO.setup(4,GPIO.OUT)
 GPIO.setup(18,GPIO.OUT)
 GPIO.setup(22,GPIO.OUT)
@@ -15,6 +17,7 @@ output = np.zeros((4, 4))
 print(output)
 print('______________________')
 
+# Mapping the outputs for each LED:
 led_map = {
         (0,0) : [True, True, False, True],      #13
         (0,1) : [True, True, False, False],     #12
@@ -60,11 +63,14 @@ def generate_output(x: int, y: int):
 
     print('LED Index : {0}, {1}'.format(x_index, y_index))
     print('______________________')
+        
     x_led, y_led = set_blinker(x_index, y_index, quadrant)
+
     print(output)
     print('______________________')
     print('1 = Blinking LEDs denoting the Origin.')
     print('8 = Actual bright LED.')
+
     output_to_grid(x_origin, y_origin, x_led, y_led)
 
 
@@ -119,7 +125,7 @@ def set_blinker(x: int, y: int, q: int):
         output[y, x] = 8
         return y, x
     
-        
+# Final function for output:
 def output_to_grid(x_origin, y_origin, x_led, y_led):
     led_values = led_map[(x_led, y_led)]
     origin_values = led_map[(x_origin, y_origin)]
@@ -140,9 +146,10 @@ def output_to_grid(x_origin, y_origin, x_led, y_led):
         time.sleep(0.5)
     
 
-# Manipulate the values here:s
+# Manipulate the values here:
 generate_output(-6000,-6000)
 
+# To play:
 #while True:
 #    for r in [10, 2600, 5100, 7600]:
 #        for c in [10, 2600, 5100, 7600]:
