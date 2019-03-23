@@ -8,6 +8,7 @@ class UI:
     """Class to handle UI"""
     root = tkinter.Tk()
 
+    # Required global variables for Labels:
     status_variable = StringVar(root)
     our_lat_variable = StringVar(root)
     our_long_variable = StringVar(root)
@@ -15,6 +16,7 @@ class UI:
     remote_long_variable = StringVar(root)
     distance_variable = StringVar(root)
 
+    # Initializing all the widgets:
     def __init__(self):
         self.root.attributes('-fullscreen', True)
         self.root.bind('<Escape>', lambda e: self.root.destroy())
@@ -49,35 +51,27 @@ class UI:
         self.distance_label = Label(self.root, textvariable=self.distance_variable, font=("Helvetica", 10), bg="white").place(x=1020, y=250, width=120, height=25)
 
         LabelFrame(self.root, text="Trajectory Covered", height=500, width=800).place(x=350, y=300)
-
+    
+    # Using root.update() method instead of root.mainloop() which is a blocking call:
     def render(self):
         self.root.update()
         time.sleep(10)
 
+    # Setting the 'status' Label:
     def set_status(self, stat):
         self.status_variable.set(repr(stat))
         self.render()
 
+    # Setting the 'Our Location' Labels:
     def set_our_location(self, lat, long):
         self.our_lat_variable.set(lat)
         self.our_long_variable.set(long)
         self.render()
-
+        
+    # Setting the 'Remote Location' Labels:
     def set_remote_location(self, lat, long):
         self.remote_lat_variable.set(lat)
         self.remote_long_variable.set(long)
         self.render()
 
-    def set_distance(self, distance):
-        self.distance_variable.set(distance)
-        self.render()
-
-    def set_graph(self, graph):
-        canvas = FigureCanvasTkAgg(graph, master=self.root)  # A tk.DrawingArea.
-        canvas.draw()
-        canvas.get_tk_widget().place(x=350, y=300)
-        canvas.get_tk_widget().grid_size(500, 800)
-
-        toolbar = NavigationToolbar2Tk(canvas, self.root)
-        toolbar.update()
-        canvas.get_tk_widget().place(x=350, y=300)
+    # Setting the 'distanceA
