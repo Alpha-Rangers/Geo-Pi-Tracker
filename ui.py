@@ -1,52 +1,76 @@
+import time
 import tkinter
 from tkinter import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
+
 class UI:
     """Class to handle UI"""
+    root = tkinter.Tk()
+
+    status_variable = StringVar(root)
+    our_lat_variable = StringVar(root)
+    our_long_variable = StringVar(root)
+    remote_lat_variable = StringVar(root)
+    remote_long_variable = StringVar(root)
+    distance_variable = StringVar(root)
 
     def __init__(self):
-        root = tkinter.Tk()
-        root.attributes('-fullscreen', True)
-        root.bind('<Escape>', lambda e: root.destroy())
+        self.root.attributes('-fullscreen', True)
+        self.root.bind('<Escape>', lambda e: self.root.destroy())
 
-        init_variable = "-"
+        self.status_variable.set("-")
+        self.our_lat_variable.set("-")
+        self.our_long_variable.set("-")
+        self.remote_lat_variable.set("-")
+        self.remote_long_variable.set("-")
+        self.distance_variable.set("-")
+        print("before set status : ")
+        print(self.status_variable.get())
 
-        Label(root, text="GeoPi Tracker", font=("Helvetica", 16)).pack()
+        Label(self.root, text="GeoPi Tracker", font=("Helvetica", 16)).pack()
 
-        Label(root, text="Status : ", font=("Helvetica", 10)).place(x=200, y=100, width=120, height=25)
-        Label(root, textvariable=init_variable, font=("Helvetica", 10), bg="white").place(x=300, y=100,width=120, height=25)
+        Label(self.root, text="Status : ", font=("Helvetica", 10)).place(x=200, y=100, width=120, height=25)
+        self.Status_label = Label(self.root, textvariable=self.status_variable, font=("Helvetica", 10), bg="white").place(x=300, y=100,width=120, height=25)
 
-        Label(root, text="Our Latitude : ", font=("Helvetica", 10)).place(x=200, y=175, width=120, height=25)
-        Label(root, textvariable=init_variable, font=("Helvetica", 10), bg="white").place(x=350, y=175, width=120, height=25)
+        Label(self.root, text="Our Latitude : ", font=("Helvetica", 10)).place(x=200, y=175, width=120, height=25)
+        self.Self_Lat_label = Label(self.root, textvariable=self.our_lat_variable, font=("Helvetica", 10), bg="white").place(x=350, y=175, width=120, height=25)
 
-        Label(root, text="Our Longitude : ", font=("Helvetica", 10)).place(x=600, y=175, width=120, height=25)
-        Label(root, textvariable=init_variable, font=("Helvetica", 10), bg="white").place(x=750, y=175, width=120, height=25)
+        Label(self.root, text="Our Longitude : ", font=("Helvetica", 10)).place(x=600, y=175, width=120, height=25)
+        self.Self_Long_label = Label(self.root, textvariable=self.our_long_variable, font=("Helvetica", 10), bg="white").place(x=750, y=175, width=120, height=25)
 
-        Label(root, text="Remote Latitude : ", font=("Helvetica", 10)).place(x=200, y=250, width=120, height=25)
-        Label(root, textvariable=init_variable, font=("Helvetica", 10), bg="white").place(x=350, y=250, width=120, height=25)
+        Label(self.root, text="Remote Latitude : ", font=("Helvetica", 10)).place(x=200, y=250, width=120, height=25)
+        self.Remote_Lat_label = Label(self.root, textvariable=self.remote_lat_variable, font=("Helvetica", 10), bg="white").place(x=350, y=250, width=120, height=25)
 
-        Label(root, text="Remote Longitude : ", font=("Helvetica", 10)).place(x=600, y=250, width=120, height=25)
-        Label(root, textvariable=init_variable, font=("Helvetica", 10), bg="white").place(x=750, y=250, width=120, height=25)
+        Label(self.root, text="Remote Longitude : ", font=("Helvetica", 10)).place(x=600, y=250, width=120, height=25)
+        self.Remote_Long_label = Label(self.root, textvariable=self.remote_long_variable, font=("Helvetica", 10), bg="white").place(x=750, y=250, width=120, height=25)
 
-        Label(root, text="Distance : ", font=("Helvetica", 10)).place(x=900, y=250, width=120, height=25)
-        Label(root, textvariable=init_variable, font=("Helvetica", 10), bg="white").place(x=1020, y=250, width=120, height=25)
+        Label(self.root, text="Distance : ", font=("Helvetica", 10)).place(x=900, y=250, width=120, height=25)
+        self.distance_label = Label(self.root, textvariable=self.distance_variable, font=("Helvetica", 10), bg="white").place(x=1020, y=250, width=120, height=25)
 
-        LabelFrame(root, text="Trajectory Covered", height=500, width=800).place(x=350, y=300)
+        LabelFrame(self.root, text="Trajectory Covered", height=500, width=800).place(x=350, y=300)
+
+    def render(self):
+        self.root.update()
+        time.sleep(10)
 
     def set_status(self, stat):
-        Label(self.root, textvariable=stat, font=("Helvetica", 10), bg="white").place(x=300, y=100, width=120, height=25)
+        self.status_variable.set(repr(stat))
+        self.render()
 
     def set_our_location(self, lat, long):
-        Label(self.root, textvariable=lat, font=("Helvetica", 10), bg="white").place(x=350, y=175, width=120, height=25)
-        Label(self.root, textvariable=long, font=("Helvetica", 10), bg="white").place(x=750, y=175, width=120, height=25)
+        self.our_lat_variable.set(lat)
+        self.our_long_variable.set(long)
+        self.render()
 
     def set_remote_location(self, lat, long):
-        Label(self.root, textvariable=lat, font=("Helvetica", 10), bg="white").place(x=350, y=250, width=120, height=25)
-        Label(self.root, textvariable=long, font=("Helvetica", 10), bg="white").place(x=750, y=250, width=120, height=25)
+        self.remote_lat_variable.set(lat)
+        self.remote_long_variable.set(long)
+        self.render()
 
     def set_distance(self, distance):
-        Label(self.root, textvariable=distance, font=("Helvetica", 10), bg="white").place(x=1020, y=250, width=120, height=25)
+        self.distance_variable.set(distance)
+        self.render()
 
     def set_graph(self, graph):
         canvas = FigureCanvasTkAgg(graph, master=self.root)  # A tk.DrawingArea.
@@ -57,4 +81,3 @@ class UI:
         toolbar = NavigationToolbar2Tk(canvas, self.root)
         toolbar.update()
         canvas.get_tk_widget().place(x=350, y=300)
-
