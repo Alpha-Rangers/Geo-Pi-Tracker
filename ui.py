@@ -74,4 +74,7 @@ class UI:
         self.remote_long_variable.set(long)
         self.render()
 
-    # Setting the 'distanceA
+    # Setting the 'distance' Label:
+    def set_remote_location(self, distance):
+        self.distance_variable.set(distance)
+        self.render()
