@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5bb70820-6040-4004-b49f-f6c2bc49f6f6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqtt_subscribe_remote.py" beforeDir="false" afterPath="$PROJECT_DIR$/mqtt_subscribe_remote.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,16 +15,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mqtt_subscribe_remote.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mqtt_subscribe_remote.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mqtt_subscribe_remote.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="194" column="25" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
+              <folding>
+                <element signature="e#36#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="ui.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mqtt_subscribe.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mqtt_subscribe.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1445">
+              <caret line="145" column="46" lean-forward="true" selection-start-line="145" selection-end-line="146" />
+              <folding>
+                <element signature="e#36#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mqtt_publish_self.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mqtt_publish_self.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="903">
+              <caret line="123" column="17" selection-start-line="123" selection-start-column="17" selection-end-line="123" selection-end-column="17" />
+              <folding>
+                <element signature="e#36#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ui.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="591">
-              <caret line="78" column="43" selection-start-line="78" selection-start-column="43" selection-end-line="78" selection-end-column="43" />
+            <state relative-caret-position="362">
+              <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -40,9 +72,12 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>'-'</find>
+      <find>url_long</find>
     </findStrings>
     <replaceStrings>
       <replace>1</replace>
+      <replace>self_lat</replace>
+      <replace>self_long</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -63,7 +98,10 @@
         <option value="$PROJECT_DIR$/outputter.py" />
         <option value="$PROJECT_DIR$/mqtt_publish.py" />
         <option value="$PROJECT_DIR$/mqtt_subscribe.py" />
+        <option value="$PROJECT_DIR$/mqtt_publish_remote.py" />
+        <option value="$PROJECT_DIR$/mqtt_publish_self.py" />
         <option value="$PROJECT_DIR$/ui.py" />
+        <option value="$PROJECT_DIR$/mqtt_subscribe_remote.py" />
       </list>
     </option>
   </component>
@@ -108,8 +146,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ui">
-    <configuration name="location_hunter" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.mqtt_publish_remote">
+    <configuration name="mqtt_publish_remote" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Real_time_tracker" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -121,13 +159,13 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/location_hunter.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mqtt_publish_remote.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="mqtt_publish" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="mqtt_publish_self" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Real_time_tracker" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -139,7 +177,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mqtt_publish.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mqtt_publish_self.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -163,7 +201,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="outputter" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="mqtt_subscribe_remote" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Real_time_tracker" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -175,7 +213,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/outputter.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mqtt_subscribe_remote.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -201,18 +239,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.mqtt_subscribe" />
-      <item itemvalue="Python.mqtt_publish" />
-      <item itemvalue="Python.location_hunter" />
-      <item itemvalue="Python.outputter" />
       <item itemvalue="Python.ui" />
+      <item itemvalue="Python.mqtt_subscribe_remote" />
+      <item itemvalue="Python.mqtt_publish_self" />
+      <item itemvalue="Python.mqtt_publish_remote" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.mqtt_publish_remote" />
+        <item itemvalue="Python.mqtt_publish_self" />
+        <item itemvalue="Python.mqtt_subscribe_remote" />
         <item itemvalue="Python.ui" />
         <item itemvalue="Python.mqtt_subscribe" />
-        <item itemvalue="Python.mqtt_publish" />
-        <item itemvalue="Python.outputter" />
-        <item itemvalue="Python.location_hunter" />
       </list>
     </recent_temporary>
   </component>
@@ -269,40 +307,54 @@
       <option name="project" value="LOCAL" />
       <updated>1551897604871</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed minor UI error of incomplete function definition.">
+      <created>1553360714902</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1553360714902</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Updated Definitions for Status label on UI">
+      <created>1553364605649</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1553364605649</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2496474" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50070524" side_tool="true" weight="0.25338754" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3292683" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2496474" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="17" sideWeight="0.50070524" side_tool="true" weight="0.25338754" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.3292683" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3292683" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4992948" weight="0.25338754" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4992948" visible="true" weight="0.31029812" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3292683" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3292683" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3292683" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.3292683" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2496474" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4992948" weight="0.25338754" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.4992948" weight="0.25338754" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50070524" side_tool="true" weight="0.25338754" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.50070524" side_tool="true" weight="0.25338754" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3292683" />
-      <window_info anchor="bottom" id="Python Console" order="7" weight="0.3292683" />
+      <window_info anchor="bottom" id="Terminal" order="15" weight="0.3292683" />
+      <window_info anchor="bottom" id="Python Console" order="16" weight="0.3292683" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -314,7 +366,9 @@
     <MESSAGE value="Minor updates in README and comments section of code." />
     <MESSAGE value="Basic implementatio of real time graph plotting." />
     <MESSAGE value="Created a basic play script to determine the LED position." />
-    <option name="LAST_COMMIT_MESSAGE" value="Created a basic play script to determine the LED position." />
+    <MESSAGE value="Fixed minor UI error of incomplete function definition." />
+    <MESSAGE value="Updated Definitions for Status label on UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Definitions for Status label on UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -322,23 +376,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/outputter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="98" column="25" selection-start-line="98" selection-start-column="25" selection-end-line="98" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mqtt_publish.py" />
     <entry file="file://$PROJECT_DIR$/mqtt_subscribe.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -361,9 +398,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret lean-forward="true" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -573,25 +607,49 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mqtt_publish.py" />
-    <entry file="file://$PROJECT_DIR$/mqtt_subscribe.py">
+    <entry file="file://$PROJECT_DIR$/mqtt_publish_remote.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3298">
-          <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
+        <state relative-caret-position="221">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
           <folding>
             <element signature="e#36#86#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mqtt_subscribe_remote.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/mqtt_publish_self.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="903">
+          <caret line="123" column="17" selection-start-line="123" selection-start-column="17" selection-end-line="123" selection-end-column="17" />
+          <folding>
+            <element signature="e#36#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mqtt_subscribe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1445">
+          <caret line="145" column="46" lean-forward="true" selection-start-line="145" selection-end-line="146" />
+          <folding>
+            <element signature="e#36#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="591">
-          <caret line="78" column="43" selection-start-line="78" selection-start-column="43" selection-end-line="78" selection-end-column="43" />
+        <state relative-caret-position="362">
+          <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mqtt_subscribe_remote.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="194" column="25" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#36#86#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -27,13 +27,11 @@ class UI:
         self.remote_lat_variable.set("-")
         self.remote_long_variable.set("-")
         self.distance_variable.set("-")
-        print("before set status : ")
-        print(self.status_variable.get())
 
         Label(self.root, text="GeoPi Tracker", font=("Helvetica", 16)).pack()
 
         Label(self.root, text="Status : ", font=("Helvetica", 10)).place(x=200, y=100, width=120, height=25)
-        self.Status_label = Label(self.root, textvariable=self.status_variable, font=("Helvetica", 10), bg="white").place(x=300, y=100,width=120, height=25)
+        self.Status_label = Label(self.root, textvariable=self.status_variable, font=("Helvetica", 10), bg="white").place(x=300, y=100, width=350, height=25)
 
         Label(self.root, text="Our Latitude : ", font=("Helvetica", 10)).place(x=200, y=175, width=120, height=25)
         self.Self_Lat_label = Label(self.root, textvariable=self.our_lat_variable, font=("Helvetica", 10), bg="white").place(x=350, y=175, width=120, height=25)
@@ -75,6 +73,6 @@ class UI:
         self.render()
 
     # Setting the 'distance' Label:
-    def set_remote_location(self, distance):
+    def set_distance(self, distance):
         self.distance_variable.set(distance)
         self.render()
