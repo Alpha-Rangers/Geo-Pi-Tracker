@@ -7,14 +7,14 @@ import numpy
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 print("before importing")
-from outputter import generate_output
+#from outputter import generate_output
 
 # defining constants to calculate the distance:
 radius = 6371000
 p = 0.017453292519943295
 latdata, longdata = [], []
-url_lat = 18.6205882
-url_long = 73.7843121
+#url_lat = 18.6205882
+#url_long = 73.7843121
 print("Defined Constants")
 
 # Configuring the PubNub connection:
@@ -28,12 +28,31 @@ print("PubNub setup")
 my_listener = SubscribeListener()
 pubnub.add_listener(my_listener)
 
-# Subscribing to the channel:
-pubnub.subscribe().channels('ESIoT').execute()
-my_listener.wait_for_connect()
-print('Subscriber Configured !')
-print('_______________________')
+def self_loc()->(float, float):
+    pubnub.subscribe().channels('Self_Loc').execute()
+    #my_listener.wait_for_connect()
+    print('Self Subscriber Configured !')
+    print('_______________________')
 
+    result = my_listener.wait_for_message_on('Self_Loc')
+    print(result.message)
+
+    result_message = repr(result.message)
+        
+
+    # Waiting for connection:
+    if result.message == str("Connected !"):
+        print("\nRemote device calliberated and ready for transmission !")
+        print("_______________________________________________________")
+
+    else:
+
+        # Filtering the lat-long from received message:
+        result_loc = result_message.split('_')
+        result_lat = float(result_loc[0][1:])
+        result_long = float(result_loc[1][:-1])
+        return result_lat, result_long
+    
 
 fig = plt.figure()
 plt.xlim(-10000, 10000)
@@ -75,8 +94,18 @@ def distance(x1, y1, x2, y2):
     
     return d
 
+a,b = self_loc()
+print("a = {0}".format(self_loc()[0]))
+print("b = {0}".format(self_loc()[1]))
 # Making the script run continuously
+# Subscribing to the channel:
+pubnub.subscribe().channels('ESIoT').execute()
+my_listener.wait_for_connect()
+print('Subscriber Configured !')
+print('_______________________')
+
 while True:
+
 
     print("Waiting for the other device .... ")
     # Listening for messages:
