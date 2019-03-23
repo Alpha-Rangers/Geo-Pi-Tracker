@@ -3,15 +3,25 @@ from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
 import time
+
+# Configuring the PubNub connection:
+pnconfig = PNConfiguration()
+pnconfig.publish_key = "pub-c-29e0c45e-724c-42ba-be7b-cb156fc74a03"
+pnconfig.subscribe_key = "sub-c-f739ed7a-2afb-11e9-8c30-16f8bea0bbad"
+pnconfig.ssl = False
+pubnub = PubNub(pnconfig)
 
 # Using Selenium to access Chrome
 chrome_options = Options()
 driver = webdriver.Chrome()
 driver.set_window_size(500, 500)
+pubnub.publish().channel("Self_Loc").message('Initializing GPS Sequence ...').sync()
 
 # Opening Google maps
 driver.get("https://google.co.in/maps")
+pubnub.publish().channel("Self_Loc").message('Accessing Google Map Services ...').sync()
 
 # Signing in:
 while True:
@@ -43,18 +53,15 @@ next_button.click()
 while True:
     try:
         password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
-        password.send_keys("krinkhold13")
-
-        after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content')
+        password.send_keys("krinkhold13", Keys.ENTER)
         break
 
     except Exception:
         time.sleep(0.1)
         continue
 
-after_pass.click()
 
-# Getting the location
+pubnub.publish().channel("Self_Loc").message('Determining the co-ordinates ...').sync()
 # Getting the location:
 while True:
     try:
@@ -65,6 +72,7 @@ while True:
         continue
 location_button.click()
 
+pubnub.publish().channel("Self_Loc").message('Trangulating the location ...').sync()
 # Zooming in
 while True:
     try:
@@ -89,14 +97,8 @@ print("LAT : {0}".format(url_lat))
 print("LONG : {0}".format(url_long))
 locData = url_lat + '_' + url_long
 
-# Configuring the PubNub connection:
-pnconfig = PNConfiguration()
-pnconfig.publish_key = "pub-c-29e0c45e-724c-42ba-be7b-cb156fc74a03"
-pnconfig.subscribe_key = "sub-c-f739ed7a-2afb-11e9-8c30-16f8bea0bbad"
-pnconfig.ssl = False
-pubnub = PubNub(pnconfig)
 
-envelope = pubnub.publish().channel("Self_Loc").message("Connected !").sync()
+envelope = pubnub.publish().channel('Self_Loc').message('Connected !').sync()
 
 # Making the script run continuously
 while True:

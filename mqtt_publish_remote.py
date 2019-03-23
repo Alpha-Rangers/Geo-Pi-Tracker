@@ -3,6 +3,7 @@ from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
 import time
 
 # Using Selenium to access Chrome
@@ -43,18 +44,13 @@ next_button.click()
 while True:
     try:
         password = driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input')
-        password.send_keys("krinkhold13")
-
-        after_pass = driver.find_element_by_xpath('//*[@id="passwordNext"]/content')
+        password.send_keys("krinkhold13", Keys.ENTER)
         break
 
     except Exception:
         time.sleep(0.1)
         continue
 
-after_pass.click()
-
-# Getting the location
 # Getting the location:
 while True:
     try:

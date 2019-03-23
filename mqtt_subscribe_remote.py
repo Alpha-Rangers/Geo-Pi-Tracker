@@ -6,16 +6,14 @@ import math
 import numpy
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-print("before importing")
 #from outputter import generate_output
 
 # defining constants to calculate the distance:
 radius = 6371000
 p = 0.017453292519943295
+url_lat = 10
+url_long = 10
 latdata, longdata = [], []
-#url_lat = 18.6205882
-#url_long = 73.7843121
-print("Defined Constants")
 
 # Configuring the PubNub connection:
 pnconfig = PNConfiguration()
@@ -23,35 +21,43 @@ pnconfig.publish_key = "pub-c-29e0c45e-724c-42ba-be7b-cb156fc74a03"
 pnconfig.subscribe_key = "sub-c-f739ed7a-2afb-11e9-8c30-16f8bea0bbad"
 pnconfig.ssl = False
 pubnub = PubNub(pnconfig)
-print("PubNub setup")
-# Listener to handle the subscription:
-my_listener = SubscribeListener()
-pubnub.add_listener(my_listener)
+print("Connecting to PubNub MQTT Broker Service")
+time.sleep(2)
 
+# Listener to handle the subscription:
+self_listener = SubscribeListener()
+pubnub.add_listener(self_listener)
+
+
+# Function to acquire self location:
 def self_loc()->(float, float):
     pubnub.subscribe().channels('Self_Loc').execute()
-    #my_listener.wait_for_connect()
-    print('Self Subscriber Configured !')
+    self_listener.wait_for_connect()
+    print('Subscriber configuration : 1/2 completed !')
     print('_______________________')
 
-    result = my_listener.wait_for_message_on('Self_Loc')
-    print(result.message)
-
-    result_message = repr(result.message)
-        
-
     # Waiting for connection:
-    if result.message == str("Connected !"):
-        print("\nRemote device calliberated and ready for transmission !")
-        print("_______________________________________________________")
+    while True:
+        self_result = self_listener.wait_for_message_on('Self_Loc')
+        self_result_message: str = repr(self_result.message)
 
-    else:
+        if self_result.message == str('Connected !'):
+            print('Receiving Location Data ...')
+            break
 
-        # Filtering the lat-long from received message:
-        result_loc = result_message.split('_')
-        result_lat = float(result_loc[0][1:])
-        result_long = float(result_loc[1][:-1])
-        return result_lat, result_long
+        else:
+            print(self_result_message)
+            continue
+
+    self_result = self_listener.wait_for_message_on('Self_Loc')
+    self_result_message: str = repr(self_result.message)
+
+    # Filtering the lat-long from received message:
+    self_result_loc = self_result_message.split('_')
+    self_result_lat = float(self_result_loc[0][1:])
+    self_result_long = float(self_result_loc[1][:-1])
+    pubnub.remove_listener(self_listener)
+    return self_result_lat, self_result_long
     
 
 fig = plt.figure()
@@ -73,8 +79,9 @@ def animate(x, y):
     graph.set_data(xdata, ydata)
     return graph
 
+
+# Calculating distance between two points using 'Haversine Formula':
 def distance(x1, y1, x2, y2):
-        # Calculating distance between two points using 'Haversine Formula'.
         # This formula calculates the distance "As a crow flies", which is the
         # shortest distance between two points on a spheroid.
         # HAVERSINE FORMULA ->
@@ -94,26 +101,26 @@ def distance(x1, y1, x2, y2):
     
     return d
 
-a,b = self_loc()
-print("a = {0}".format(self_loc()[0]))
-print("b = {0}".format(self_loc()[1]))
-# Making the script run continuously
+self_lat ,self_long  = self_loc()
+
+
 # Subscribing to the channel:
+remote_listener = SubscribeListener()
+pubnub.add_listener(remote_listener)
 pubnub.subscribe().channels('ESIoT').execute()
-my_listener.wait_for_connect()
+remote_listener.wait_for_connect()
 print('Subscriber Configured !')
 print('_______________________')
 
+# Making the script run continuously
+
 while True:
-
-
     print("Waiting for the other device .... ")
     # Listening for messages:
-    result = my_listener.wait_for_message_on('ESIoT')
+    result = remote_listener.wait_for_message_on('ESIoT')
     print(result.message)
 
     result_message = repr(result.message)
-        
 
     # Waiting for connection:
     if result.message == str("Connected !"):
@@ -162,5 +169,5 @@ while True:
         plt.draw()
         plt.pause(0.1)
         
-        generate_output(plot_lat, plot_long)
+        #generate_output(plot_lat, plot_long)
         
