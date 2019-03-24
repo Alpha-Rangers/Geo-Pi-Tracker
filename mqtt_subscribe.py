@@ -3,10 +3,9 @@ from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub, SubscribeListener
 import time
 import math
-import numpy
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-#from outputter import generate_output
+from outputter import generate_output
 from ui import UI
 import threading
 
@@ -24,8 +23,8 @@ def update_status(stat):
 
 
 # Function to update self location on UI:
-def update_our_loc(self_lat, self_long):
-    self_loc_thread = threading.Thread(target=user_interface.set_our_location(self_lat, self_long))
+def update_our_loc(self_lat_var, self_long_var):
+    self_loc_thread = threading.Thread(target=user_interface.set_our_location(self_lat_var, self_long_var))
     self_loc_thread.start()
 
 
@@ -36,9 +35,15 @@ def update_remote_loc(remote_lat, remote_long):
 
 
 # Function to update distance on UI:
-def update_distance(distance):
-    status_thread = threading.Thread(target=user_interface.set_distance(distance))
+def update_distance(distance_var):
+    status_thread = threading.Thread(target=user_interface.set_distance(distance_var))
     status_thread.start()
+
+
+# Function to send co-ordinates to the outputter file:
+def send_to_outputter(lat, long):
+    output_thread = threading.Thread(target=generate_output(lat, long))
+    output_thread.start()
 
 
 # Configuring the PubNub connection:
@@ -86,11 +91,11 @@ def distance(x1, y1, x2, y2):
         #
         # [ Here, φ is latitude, λ is longitude ]
         
-    relative_lat = x2 - x1
-    relative_long = y2 - y1
+    relative_latitude = x2 - x1
+    relative_longitude = y2 - y1
     
-    a = math.pow(math.sin((relative_lat / 2) * p), 2) + \
-            math.cos(x2 * p) * math.cos(x1) * math.pow(math.sin((relative_long / 2) * p), 2)
+    a = math.pow(math.sin((relative_latitude / 2) * p), 2) + \
+            math.cos(x2 * p) * math.cos(x1) * math.pow(math.sin((relative_longitude / 2) * p), 2)
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     d = radius * c
     
@@ -134,6 +139,7 @@ def self_loc()->(float, float):
     return self_result_lat, self_result_long
 
 
+# Acquiring location and updating UI:
 self_lat, self_long = self_loc()
 update_our_loc(self_lat, self_long)
 
@@ -147,10 +153,10 @@ update_status('Subscriber Configured !')
 print('_______________________')
 
 # Making the script run continuously
-
 while True:
     print("Waiting for the other device .... ")
     update_status('Waiting for the other device .... ')
+
     # Listening for messages:
     result = remote_listener.wait_for_message_on('ESIoT')
     print(result.message)
@@ -165,7 +171,6 @@ while True:
         print("_______________________________________________________")
 
     else:
-
         # Filtering the lat-long from received message:
         result_loc = result_message.split('_')
         result_lat = float(result_loc[0][1:])
@@ -188,12 +193,14 @@ while True:
         latdata.append(relative_lat)
         longdata.append(relative_long)
 
+        # Calculating distance between the two points:
         d = distance(self_lat, self_long, result_lat, result_long)
 
         print("Distance = {0} meters.".format(d))
         print("_______________________")
         update_distance(d)
 
+        # Calculating points on graph based on distance:
         plot_lat = distance(self_lat, 0, result_lat, 0)
         plot_long = distance(self_long, 0, result_long, 0)
 
@@ -206,9 +213,11 @@ while True:
         print("plot_long : " + str(plot_long))
         print("plot_lat : " + str(plot_lat))
 
+        # Generating graph:
         ani = FuncAnimation(fig, animate(plot_lat, plot_long), frames=10, interval=200)
         plt.draw()
         plt.pause(0.1)
 
-        #generate_output(plot_lat, plot_long)
+        # Generating output on LED Grid:
+        send_to_outputter(plot_lat, plot_long)
 
