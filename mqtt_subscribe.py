@@ -46,6 +46,12 @@ def send_to_outputter(lat, long):
     output_thread.start()
 
 
+# Function to send the graph image to UI:
+def update_graph(file_path):
+    graph_thread = threading.Thread(target=user_interface.set_graph(file_path))
+    graph_thread.start()
+
+
 # Configuring the PubNub connection:
 pnconfig = PNConfiguration()
 pnconfig.publish_key = "pub-c-29e0c45e-724c-42ba-be7b-cb156fc74a03"
@@ -73,6 +79,7 @@ xdata, ydata = [], []
 graph, = plt.plot([], [], '-')
 
 
+# Render graph with new co-ordinates:
 def animate(x, y):
     xdata.append(x)
     ydata.append(y)
@@ -152,7 +159,7 @@ print('Subscriber Configured !')
 update_status('Subscriber Configured !')
 print('_______________________')
 
-# Making the script run continuously
+# Making the script run continuously:
 while True:
     print("Waiting for the other device .... ")
     update_status('Waiting for the other device .... ')
@@ -204,6 +211,7 @@ while True:
         plot_lat = distance(self_lat, 0, result_lat, 0)
         plot_long = distance(self_long, 0, result_long, 0)
 
+        # Calculating relative location:
         if relative_lat < 0:
             plot_lat = 0 - plot_lat
 
@@ -215,8 +223,8 @@ while True:
 
         # Generating graph:
         ani = FuncAnimation(fig, animate(plot_lat, plot_long), frames=10, interval=200)
-        plt.draw()
-        plt.pause(0.1)
+        plt.savefig('graph.png')
+        update_graph('graph.png')
 
         # Generating output on LED Grid:
         send_to_outputter(plot_lat, plot_long)
