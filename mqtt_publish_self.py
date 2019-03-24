@@ -13,13 +13,13 @@ pnconfig.subscribe_key = "sub-c-f739ed7a-2afb-11e9-8c30-16f8bea0bbad"
 pnconfig.ssl = False
 pubnub = PubNub(pnconfig)
 
-# Using Selenium to access Chrome
+# Using Selenium to access Chrome:
 chrome_options = Options()
 driver = webdriver.Chrome()
 driver.set_window_size(500, 500)
 pubnub.publish().channel("Self_Loc").message('Initializing GPS Sequence ...').sync()
 
-# Opening Google maps
+# Opening Google maps:
 driver.get("https://google.co.in/maps")
 pubnub.publish().channel("Self_Loc").message('Accessing Google Map Services ...').sync()
 
@@ -73,7 +73,7 @@ while True:
 location_button.click()
 
 pubnub.publish().channel("Self_Loc").message('Trangulating the location ...').sync()
-# Zooming in
+# Zooming in:
 while True:
     try:
         zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
@@ -106,6 +106,17 @@ while True:
     # Getting the location
     location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
     location_button.click()
+    while True:
+        try:
+            zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
+            break
+        except Exception:
+            time.sleep(0.1)
+            continue
+
+    for i in range(5):
+        zoom_button.click()
+        time.sleep(2)
 
     url_strings = repr(driver.current_url).split("@")
     url_location = url_strings[1].split(",")
@@ -120,5 +131,5 @@ while True:
     print("Sent : {0}".format(locData))
     print("______")
 
-    # Setting time interval to 1 sec.
+    # Setting time interval to 5 sec.
     time.sleep(5)

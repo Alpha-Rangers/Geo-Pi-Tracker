@@ -100,6 +100,17 @@ while True:
     # Getting the location
     location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
     location_button.click()
+    while True:
+        try:
+            zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
+            break
+        except Exception:
+            time.sleep(0.1)
+            continue
+
+    for i in range(5):
+        zoom_button.click()
+        time.sleep(2)
 
     url_strings = repr(driver.current_url).split("@")
     url_location = url_strings[1].split(",")
@@ -114,7 +125,7 @@ while True:
     print("Sent : {0}".format(locData))
     print("______")
 
-    # Setting time interval to 1 sec.
+    # Setting time interval to 5 sec.
     time.sleep(5)
 
 
