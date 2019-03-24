@@ -6,6 +6,8 @@
       <change beforePath="$PROJECT_DIR$/mqtt_publish_remote.py" beforeDir="false" afterPath="$PROJECT_DIR$/mqtt_publish_remote.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mqtt_publish_self.py" beforeDir="false" afterPath="$PROJECT_DIR$/mqtt_publish_self.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mqtt_subscribe.py" beforeDir="false" afterPath="$PROJECT_DIR$/mqtt_subscribe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_tester.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +21,44 @@
       <file leaf-file-name="mqtt_subscribe.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mqtt_subscribe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="221" column="46" lean-forward="true" selection-start-line="221" selection-start-column="46" selection-end-line="221" selection-end-column="46" />
+            <state relative-caret-position="1615">
+              <caret line="95" column="75" lean-forward="true" selection-start-line="95" selection-start-column="75" selection-end-line="95" selection-end-column="75" />
+              <folding>
+                <element signature="e#36#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ui_tester.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ui_tester.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="23" column="36" lean-forward="true" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ui.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ui.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1091">
+              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mqtt_publish_remote.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mqtt_publish_remote.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="114" column="19" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
               <folding>
                 <element signature="e#36#86#0" expanded="true" />
               </folding>
@@ -31,29 +69,11 @@
       <file leaf-file-name="mqtt_publish_self.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mqtt_publish_self.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="133" column="32" selection-start-line="133" selection-start-column="32" selection-end-line="133" selection-end-column="32" />
+            <state relative-caret-position="1530">
+              <caret line="90" column="15" lean-forward="true" selection-start-line="90" selection-end-line="91" />
               <folding>
                 <element signature="e#36#86#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mqtt_publish_remote.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mqtt_publish_remote.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="127" column="32" selection-start-line="127" selection-start-column="32" selection-end-line="127" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ui.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -95,11 +115,12 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/outputter.py" />
         <option value="$PROJECT_DIR$/mqtt_publish.py" />
-        <option value="$PROJECT_DIR$/ui.py" />
         <option value="$PROJECT_DIR$/mqtt_subscribe_remote.py" />
+        <option value="$PROJECT_DIR$/ui_tester.py" />
         <option value="$PROJECT_DIR$/mqtt_subscribe.py" />
-        <option value="$PROJECT_DIR$/mqtt_publish_remote.py" />
+        <option value="$PROJECT_DIR$/ui.py" />
         <option value="$PROJECT_DIR$/mqtt_publish_self.py" />
+        <option value="$PROJECT_DIR$/mqtt_publish_remote.py" />
       </list>
     </option>
   </component>
@@ -181,24 +202,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="mqtt_subscribe" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Real_time_tracker" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mqtt_subscribe.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="mqtt_subscribe_remote" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Real_time_tracker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -235,20 +238,38 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="ui_tester" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Real_time_tracker" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui_tester.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list>
-      <item itemvalue="Python.mqtt_subscribe" />
       <item itemvalue="Python.ui" />
       <item itemvalue="Python.mqtt_subscribe_remote" />
       <item itemvalue="Python.mqtt_publish_self" />
       <item itemvalue="Python.mqtt_publish_remote" />
+      <item itemvalue="Python.ui_tester" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.mqtt_publish_remote" />
+        <item itemvalue="Python.ui_tester" />
         <item itemvalue="Python.mqtt_publish_self" />
         <item itemvalue="Python.mqtt_subscribe_remote" />
         <item itemvalue="Python.ui" />
-        <item itemvalue="Python.mqtt_subscribe" />
       </list>
     </recent_temporary>
   </component>
@@ -326,7 +347,21 @@
       <option name="project" value="LOCAL" />
       <updated>1553366489899</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Updated subscribe script with Threads.">
+      <created>1553422559555</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1553422559555</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Zoomed in before transmitting location.">
+      <created>1553422579698</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1553422579698</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -336,9 +371,10 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2496474" />
       <window_info anchor="bottom" id="TODO" order="11" />
       <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.50070524" side_tool="true" weight="0.25338754" />
-      <window_info anchor="bottom" id="Version Control" order="13" visible="true" weight="0.22493225" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.23577236" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.22493225" />
       <window_info anchor="bottom" id="Python Console" order="16" weight="0.3292683" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.4992948" weight="0.25338754" />
+      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.4992948" visible="true" weight="0.33604336" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="15" weight="0.3292683" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -349,7 +385,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -364,7 +399,9 @@
     <MESSAGE value="Fixed minor UI error of incomplete function definition." />
     <MESSAGE value="Updated Definitions for Status label on UI" />
     <MESSAGE value="Connected UI with Subscriber script." />
-    <option name="LAST_COMMIT_MESSAGE" value="Connected UI with Subscriber script." />
+    <MESSAGE value="Updated subscribe script with Threads." />
+    <MESSAGE value="Zoomed in before transmitting location." />
+    <option name="LAST_COMMIT_MESSAGE" value="Zoomed in before transmitting location." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -372,31 +409,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mqtt_subscribe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="55" column="74" selection-start-line="55" selection-start-column="74" selection-end-line="55" selection-end-column="74" />
-          <folding>
-            <element signature="e#36#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/outputter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="98" column="25" selection-start-line="98" selection-start-column="25" selection-end-line="98" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mqtt_publish.py" />
     <entry file="file://$PROJECT_DIR$/outputter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1666">
@@ -587,13 +599,6 @@
     <entry file="file://$PROJECT_DIR$/../tensorFlow/tensor.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/outputter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="98" column="25" selection-start-line="98" selection-start-column="25" selection-end-line="98" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../venv-3.6/Lib/site-packages/selenium/webdriver/remote/errorhandler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
@@ -602,47 +607,73 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mqtt_publish.py" />
-    <entry file="file://$PROJECT_DIR$/mqtt_subscribe_remote.py">
+    <entry file="file://$PROJECT_DIR$/mqtt_subscribe_remote.py" />
+    <entry file="file://$PROJECT_DIR$/ESIoT.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ESIoT_1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graph.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mqtt_subscribe_(old).py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/outputter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="163" selection-start-line="163" selection-end-line="163" />
+        <state relative-caret-position="-561">
+          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mqtt_subscribe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1615">
+          <caret line="95" column="75" lean-forward="true" selection-start-line="95" selection-start-column="75" selection-end-line="95" selection-end-column="75" />
           <folding>
             <element signature="e#36#86#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ESIoT.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui.py">
+    <entry file="file://$PROJECT_DIR$/ui_tester.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+        <state relative-caret-position="23">
+          <caret line="23" column="36" lean-forward="true" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mqtt_subscribe.py">
+    <entry file="file://$PROJECT_DIR$/ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="221" column="46" lean-forward="true" selection-start-line="221" selection-start-column="46" selection-end-line="221" selection-end-column="46" />
+        <state relative-caret-position="1091">
+          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
           <folding>
-            <element signature="e#36#86#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mqtt_publish_remote.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="127" column="32" selection-start-line="127" selection-start-column="32" selection-end-line="127" selection-end-column="32" />
+        <state relative-caret-position="255">
+          <caret line="114" column="19" selection-start-line="114" selection-start-column="19" selection-end-line="114" selection-end-column="19" />
+          <folding>
+            <element signature="e#36#86#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mqtt_publish_self.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="133" column="32" selection-start-line="133" selection-start-column="32" selection-end-line="133" selection-end-column="32" />
+        <state relative-caret-position="1530">
+          <caret line="90" column="15" lean-forward="true" selection-start-line="90" selection-end-line="91" />
           <folding>
             <element signature="e#36#86#0" expanded="true" />
           </folding>

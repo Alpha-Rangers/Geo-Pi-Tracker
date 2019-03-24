@@ -6,12 +6,12 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 import time
 
-# Using Selenium to access Chrome
+# Using Selenium to access Chrome:
 chrome_options = Options()
 driver = webdriver.Chrome()
 driver.set_window_size(500, 500)
 
-# Opening Google maps
+# Opening Google maps:
 driver.get("https://google.co.in/maps")
 
 # Signing in:
@@ -61,7 +61,7 @@ while True:
         continue
 location_button.click()
 
-# Zooming in
+# Zooming in:
 while True:
     try:
         zoom_button = driver.find_element_by_xpath('//*[@id="widget-zoom-in"]')
@@ -76,7 +76,7 @@ for i in range(5):
 
 print(driver.current_url)
 
-# Getting info
+# Getting info:
 url_strings = repr(driver.current_url).split("@")
 url_location = url_strings[1].split(",")
 url_lat = url_location[0]
@@ -94,10 +94,10 @@ pubnub = PubNub(pnconfig)
 
 envelope = pubnub.publish().channel("ESIoT").message("Connected !").sync()
 
-# Making the script run continuously
+# Making the script run continuously:
 while True:
 
-    # Getting the location
+    # Getting the location:
     location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
     location_button.click()
     while True:
@@ -112,6 +112,7 @@ while True:
         zoom_button.click()
         time.sleep(2)
 
+    # Getting info:
     url_strings = repr(driver.current_url).split("@")
     url_location = url_strings[1].split(",")
     url_lat = url_location[0]
@@ -125,7 +126,7 @@ while True:
     print("Sent : {0}".format(locData))
     print("______")
 
-    # Setting time interval to 5 sec.
+    # Setting time interval to 5 sec:
     time.sleep(5)
 
 

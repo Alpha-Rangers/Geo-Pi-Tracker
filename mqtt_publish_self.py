@@ -88,7 +88,7 @@ for i in range(5):
 
 print(driver.current_url)
 
-# Getting info
+# Getting info:
 url_strings = repr(driver.current_url).split("@")
 url_location = url_strings[1].split(",")
 url_lat = url_location[0]
@@ -100,10 +100,10 @@ locData = url_lat + '_' + url_long
 
 envelope = pubnub.publish().channel('Self_Loc').message('Connected !').sync()
 
-# Making the script run continuously
+# Making the script run continuously:
 while True:
 
-    # Getting the location
+    # Getting the location:
     location_button = driver.find_element_by_xpath('//*[@id="widget-mylocation"]')
     location_button.click()
     while True:
@@ -131,5 +131,5 @@ while True:
     print("Sent : {0}".format(locData))
     print("______")
 
-    # Setting time interval to 5 sec.
+    # Setting time interval to 5 sec:
     time.sleep(5)
