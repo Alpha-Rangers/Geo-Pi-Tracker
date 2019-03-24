@@ -6,7 +6,9 @@
 ### *Hardware :*
  - Raspberry Pi 3 x 2
  - Breadboard x 1
- - Wires 
+ - IC 7404 (NOT Gate) x 1
+ - IC 74138 (1:8 DeMUX) x 2
+ - Single layer PCB
  - LED x 16
  
  ### *Software :*
@@ -32,3 +34,5 @@ Access the [PubNub account](https://admin.pubnub.com/#/user/485567/account/48552
 Matplotlib will be used to plot the real-time location of the second Raspi on the graph.
 
 The [Haversine Formula](http://www.movable-type.co.uk/scripts/latlong.html) is used to calculate the distance between the two points in meters.
+
+[Find more details about the project.](https://docs.google.com/document/d/1KCYRFPLAYCFK_cW10q42ZrTNj4GCa3kxpJBWMFR7w-s/edit?usp=sharing)
