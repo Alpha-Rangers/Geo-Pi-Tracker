@@ -1,7 +1,7 @@
 import time
 import tkinter
 from tkinter import *
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from PIL import ImageTk,Image
 
 
 class UI:
@@ -28,10 +28,22 @@ class UI:
         self.remote_long_variable.set("-")
         self.distance_variable.set("-")
 
-        Label(self.root, text="GeoPi Tracker", font=("Helvetica", 16)).pack()
+        # Demo image at graph_label:
+        self.original_image = Image.open('original_graph.png')
+        self.original_graph = ImageTk.PhotoImage(self.original_image)
+
+        # College Logo at the Corner:
+        self.I2IT = Image.open('I2IT.png')
+        self.I2IT.thumbnail((64, 64), Image.ANTIALIAS)
+        self.college_logo = ImageTk.PhotoImage(self.I2IT)
+
+        # Initiating all Labels used in UI:
+        Label(self.root, text="GeoPi Tracker", font=("Helvetica", 20), borderwidth=4, relief='solid').pack()
+
+        Label(self.root, image=self.college_logo).place(x=0, y=0, width=64, height=64)
 
         Label(self.root, text="Status : ", font=("Helvetica", 10)).place(x=200, y=100, width=120, height=25)
-        self.Status_label = Label(self.root, textvariable=self.status_variable, font=("Helvetica", 10), bg="white").place(x=300, y=100, width=350, height=25)
+        self.Status_label = Label(self.root, textvariable=self.status_variable, font=("Helvetica", 10), bg="white").place(x=350, y=100, width=350, height=25)
 
         Label(self.root, text="Our Latitude : ", font=("Helvetica", 10)).place(x=200, y=175, width=120, height=25)
         self.Self_Lat_label = Label(self.root, textvariable=self.our_lat_variable, font=("Helvetica", 10), bg="white").place(x=350, y=175, width=120, height=25)
@@ -48,7 +60,10 @@ class UI:
         Label(self.root, text="Distance : ", font=("Helvetica", 10)).place(x=900, y=250, width=120, height=25)
         self.distance_label = Label(self.root, textvariable=self.distance_variable, font=("Helvetica", 10), bg="white").place(x=1020, y=250, width=120, height=25)
 
-        LabelFrame(self.root, text="Trajectory Covered", height=500, width=800).place(x=350, y=300)
+        Label(self.root, text="Real-Time Graph : ", font=("Helvetica", 10)).place(x=200, y=350, width=120, height=25)
+        self.graph_label = Label(self.root, image=self.original_graph, bd=4, height=550, width=900)
+        self.graph_label.place(x=250, y=377)
+        self.graph_label.image = self.original_graph
     
     # Using root.update() method instead of root.mainloop() which is a blocking call:
     def render(self):
@@ -76,3 +91,13 @@ class UI:
     def set_distance(self, distance):
         self.distance_variable.set(distance)
         self.render()
+
+    # Setting the graph image:
+    def set_graph(self, image):
+        new_graph = Image.open(image)
+        print("IMAGE : " + image)
+        graph_image = ImageTk.PhotoImage(new_graph)
+        self.graph_label.configure(image=graph_image)
+        self.graph_label.image = graph_image
+        self.render()
+
