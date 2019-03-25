@@ -80,36 +80,33 @@ class UI:
 
         Label(self.root, textvariable=self.compass_varianle, font=("Helvetica", 10)).place(x=900, y=600, width=450, height=25)
 
-        self.render_generator = self.render()
 
     # Using root.update() method instead of root.mainloop() which is a blocking call:
-
     def render(self):
-        while True:
-            self.root.update()
-            yield True
+        self.root.update()
+
 
     # Setting the 'status' Label:
     def set_status(self, stat):
         self.status_variable.set(repr(stat))
-        self.render_generator.__next__()
+        self.render()
 
     # Setting the 'Our Location' Labels:
     def set_our_location(self, lat, long):
         self.our_lat_variable.set(lat)
         self.our_long_variable.set(long)
-        self.render_generator.__next__()
+        self.render()
 
     # Setting the 'Remote Location' Labels:
     def set_remote_location(self, lat, long):
         self.remote_lat_variable.set(lat)
         self.remote_long_variable.set(long)
-        self.render_generator.__next__()
+        self.render()
 
     # Setting the 'distance' Label:
     def set_distance(self, distance):
         self.distance_variable.set(distance)
-        self.render_generator.__next__()
+        self.render()
 
     # Setting the graph image:
     def set_graph(self, image):
@@ -118,23 +115,20 @@ class UI:
         graph_image = ImageTk.PhotoImage(new_graph)
         self.graph_label.configure(image=graph_image)
         self.graph_label.image = graph_image
-        self.render_generator.__next__()
+        self.render()
 
     # Setting the compass directions:
     def set_compass_text(self, compass):
         self.compass_varianle.set(compass)
-        self.render_generator.__next__()
+        self.render()
 
-    # Setting the compass image:
+    # Setting the graph image:
     def set_compass_graph(self, image):
         new_graph = Image.open(image)
         print("IMAGE : " + image)
         graph_image = ImageTk.PhotoImage(new_graph)
         self.compass_label.configure(image=graph_image)
         self.compass_label.image = graph_image
-        self.render_generator.__next__()
-
-
-
+        self.render()
 
 
