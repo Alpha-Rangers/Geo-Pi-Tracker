@@ -15,6 +15,7 @@ class UI:
     remote_lat_variable = StringVar(root)
     remote_long_variable = StringVar(root)
     distance_variable = StringVar(root)
+    compass_varianle = StringVar(root)
 
     # Initializing all the widgets:
     def __init__(self):
@@ -27,6 +28,7 @@ class UI:
         self.remote_lat_variable.set("-")
         self.remote_long_variable.set("-")
         self.distance_variable.set("-")
+        self.compass_varianle.set("-")
 
         # Demo image at graph_label:
         self.original_image = Image.open('original_graph.png')
@@ -42,34 +44,42 @@ class UI:
 
         Label(self.root, image=self.college_logo).place(x=0, y=0, width=64, height=64)
 
-        Label(self.root, text="Status : ", font=("Helvetica", 10)).place(x=200, y=100, width=120, height=25)
+        Label(self.root, text="Status : ", font=("Helvetica", 10)).place(x=200, y=70, width=120, height=25)
         self.Status_label = Label(self.root, textvariable=self.status_variable, font=("Helvetica", 10),
-                                  bg="white").place(x=350, y=100, width=350, height=25)
+                                  bg="white").place(x=350, y=70, width=350, height=25)
 
-        Label(self.root, text="Our Latitude : ", font=("Helvetica", 10)).place(x=200, y=175, width=120, height=25)
+        Label(self.root, text="Our Latitude : ", font=("Helvetica", 10)).place(x=200, y=145, width=120, height=25)
         self.Self_Lat_label = Label(self.root, textvariable=self.our_lat_variable, font=("Helvetica", 10),
-                                    bg="white").place(x=350, y=175, width=120, height=25)
+                                    bg="white").place(x=350, y=145, width=120, height=25)
 
-        Label(self.root, text="Our Longitude : ", font=("Helvetica", 10)).place(x=600, y=175, width=120, height=25)
+        Label(self.root, text="Our Longitude : ", font=("Helvetica", 10)).place(x=600, y=145, width=120, height=25)
         self.Self_Long_label = Label(self.root, textvariable=self.our_long_variable, font=("Helvetica", 10),
-                                     bg="white").place(x=750, y=175, width=120, height=25)
+                                     bg="white").place(x=750, y=145, width=120, height=25)
 
-        Label(self.root, text="Remote Latitude : ", font=("Helvetica", 10)).place(x=200, y=250, width=120, height=25)
+        Label(self.root, text="Remote Latitude : ", font=("Helvetica", 10)).place(x=200, y=220, width=120, height=25)
         self.Remote_Lat_label = Label(self.root, textvariable=self.remote_lat_variable, font=("Helvetica", 10),
-                                      bg="white").place(x=350, y=250, width=120, height=25)
+                                      bg="white").place(x=350, y=220, width=120, height=25)
 
-        Label(self.root, text="Remote Longitude : ", font=("Helvetica", 10)).place(x=600, y=250, width=120, height=25)
+        Label(self.root, text="Remote Longitude : ", font=("Helvetica", 10)).place(x=600, y=220, width=120, height=25)
         self.Remote_Long_label = Label(self.root, textvariable=self.remote_long_variable, font=("Helvetica", 10),
-                                       bg="white").place(x=750, y=250, width=120, height=25)
+                                       bg="white").place(x=750, y=220, width=120, height=25)
 
-        Label(self.root, text="Distance : ", font=("Helvetica", 10)).place(x=900, y=250, width=120, height=25)
+        Label(self.root, text="Distance : ", font=("Helvetica", 10)).place(x=900, y=220, width=120, height=25)
         self.distance_label = Label(self.root, textvariable=self.distance_variable, font=("Helvetica", 10),
-                                    bg="white").place(x=1020, y=250, width=120, height=25)
+                                    bg="white").place(x=1020, y=220, width=120, height=25)
 
-        Label(self.root, text="Real-Time Graph : ", font=("Helvetica", 10)).place(x=200, y=350, width=120, height=25)
-        self.graph_label = Label(self.root, image=self.original_graph, bd=4, height=550, width=900)
-        self.graph_label.place(x=250, y=377)
+        Label(self.root, text="Real-Time Graph : ", font=("Helvetica", 10)).place(x=200, y=270, width=120, height=25)
+        self.graph_label = Label(self.root, image=self.original_graph, bd=4, height=450, width=650)
+        self.graph_label.place(x=200, y=300)
         self.graph_label.image = self.original_graph
+
+        Label(self.root, text="Compass : ", font=("Helvetica", 10)).place(x=900, y=270, width=120, height=25)
+        self.compass_label = Label(self.root, image=self.original_graph, bd=4, height=275, width=300)
+        self.compass_label.place(x=900, y=300)
+        self.compass_label.image = self.original_graph
+
+        Label(self.root, textvariable=self.compass_varianle, font=("Helvetica", 10)).place(x=900, y=600, width=450, height=25)
+
         self.render_generator = self.render()
 
     # Using root.update() method instead of root.mainloop() which is a blocking call:
@@ -109,5 +119,22 @@ class UI:
         self.graph_label.configure(image=graph_image)
         self.graph_label.image = graph_image
         self.render_generator.__next__()
+
+    # Setting the compass directions:
+    def set_compass_text(self, compass):
+        self.compass_varianle.set(compass)
+        self.render_generator.__next__()
+
+    # Setting the compass image:
+    def set_compass_graph(self, image):
+        new_graph = Image.open(image)
+        print("IMAGE : " + image)
+        graph_image = ImageTk.PhotoImage(new_graph)
+        self.compass_label.configure(image=graph_image)
+        self.compass_label.image = graph_image
+        self.render_generator.__next__()
+
+
+
 
 
