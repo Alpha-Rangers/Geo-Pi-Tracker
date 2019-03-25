@@ -36,22 +36,23 @@ led_map = {
         (3,2) : [False, False, True, True],     #3
         (3,3) : [False, False, True, False]     #2
     }
+
 # Init LED sequence:
 def call_init_sequence():
-        init_sequence(0,0)
-        init_sequence(0,3)
-        init_sequence(3,3)
-        init_sequence(3,0)
+        while True:
+                init_sequence(0,0)
+                init_sequence(0,3)
+                init_sequence(3,3)
+                init_sequence(3,0)
         
 def init_sequence(x_led, y_led):
-        while True:
-                led_values = led_map[(x_led, y_led)]
-                GPIO.output(4,led_values[0])
-                GPIO.output(18,led_values[1])
-                GPIO.output(22,led_values[2])
-                GPIO.output(25,led_values[3])
+        led_values = led_map[(x_led, y_led)]
+        GPIO.output(4,led_values[0])
+        GPIO.output(18,led_values[1])
+        GPIO.output(22,led_values[2])
+        GPIO.output(25,led_values[3])
 
-                time.sleep(0.5)
+        time.sleep(0.5)
 
 # Generate the output on LED Grid:
 def generate_output(x: int, y: int):
@@ -163,7 +164,7 @@ def output_to_grid(x_origin, y_origin, x_led, y_led):
     
 
 # Manipulate the values here:
-generate_output(-6000,-6000)
+# generate_output(-6000,-6000)
 
 # To play:
 #while True:
