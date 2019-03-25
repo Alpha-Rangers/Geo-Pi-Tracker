@@ -5,12 +5,15 @@ import time
 import math
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-#from outputter import generate_output
+from outputter import generate_output, call_init_sequence, kill_should_run
 from ui import UI
 import threading
 
 # defining constants to calculate the distance:
 user_interface = UI()
+init_LED_thread = threading.Thread(target=call_init_sequence())
+init_LED_thread.start()
+
 radius = 6371000
 p = 0.017453292519943295
 latdata, longdata = [], []
@@ -41,9 +44,9 @@ def update_distance(distance_var):
 
 
 # Function to send co-ordinates to the outputter file:
-#def send_to_outputter(lat, long):
-    #output_thread = threading.Thread(target=generate_output(lat, long))
-    #output_thread.start()
+def send_to_outputter(lat, long):
+    output_thread = threading.Thread(target=generate_output(lat, long))
+    output_thread.start()
 
 
 # Function to send the graph image to UI:
@@ -76,7 +79,6 @@ def update_graph(plot_x, plot_y, file_path):
 
 # Function to send the compass details to UI:
 def update_compass(plot_x, plot_y, distance, file_path):
-
     compass = plt.figure()
     plt.xlim(-1000, 1000)
     plt.ylim(-1000, 1000)
@@ -101,7 +103,8 @@ def update_compass(plot_x, plot_y, distance, file_path):
     elif plot_y < 0 < plot_x:
         direction = 'SOUTH-EAST'
 
-    compass_string = 'The target object is at {0} meters from you, in {1} direction.'.format(round(distance, 2), direction)
+    compass_string = 'The target object is at {0} meters from you, in {1} direction.'.format(round(distance, 2),
+                                                                                             direction)
     compass_text_thread = threading.Thread(target=user_interface.set_compass_text(compass_string))
     compass_text_thread.start()
 
@@ -192,6 +195,8 @@ print('Subscriber Configured !')
 update_status('Subscriber Configured !')
 print('_______________________')
 
+kill_should_run()
+
 # Making the script run continuously:
 while True:
     print("Waiting for the other device .... ")
@@ -260,4 +265,4 @@ while True:
         update_compass(plot_lat, plot_long, d, 'compass.png')
 
         # Generating output on LED Grid:
-        #send_to_outputter(plot_lat, plot_long)
+        send_to_outputter(plot_lat, plot_long)
