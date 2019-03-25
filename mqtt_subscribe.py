@@ -5,7 +5,7 @@ import time
 import math
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from outputter import generate_output
+#from outputter import generate_output
 from ui import UI
 import threading
 
@@ -41,15 +41,69 @@ def update_distance(distance_var):
 
 
 # Function to send co-ordinates to the outputter file:
-def send_to_outputter(lat, long):
-    output_thread = threading.Thread(target=generate_output(lat, long))
-    output_thread.start()
+#def send_to_outputter(lat, long):
+    #output_thread = threading.Thread(target=generate_output(lat, long))
+    #output_thread.start()
 
 
 # Function to send the graph image to UI:
-def update_graph(file_path):
+def update_graph(plot_x, plot_y, file_path):
+    fig = plt.figure()
+    plt.xlim(-1000, 1000)
+    plt.ylim(-1000, 1000)
+    plt.axhline(y=0, color='r')
+    plt.axvline(x=0, color='r')
+
+    plt.xlabel("Distance Units (meters)")
+    plt.ylabel("Distance Units (meters)")
+    plt.title("Trajectory of the other Device.")
+    xdata, ydata = [], []
+    graph, = plt.plot([], [], '-')
+
+    # Render graph with new co-ordinates:
+    def animate(x, y):
+        xdata.append(x)
+        ydata.append(y)
+        graph.set_data(xdata, ydata)
+        return graph
+
+    ani = FuncAnimation(fig, animate(plot_x, plot_y), frames=10, interval=200)
+    plt.savefig('graph.png')
+
     graph_thread = threading.Thread(target=user_interface.set_graph(file_path))
     graph_thread.start()
+
+
+# Function to send the compass details to UI:
+def update_compass(plot_x, plot_y, distance, file_path):
+
+    compass = plt.figure()
+    plt.xlim(-1000, 1000)
+    plt.ylim(-1000, 1000)
+    plt.axhline(y=0, color='r')
+    plt.axvline(x=0, color='r')
+    plt.arrow(0, 0, plot_x, plot_y)
+    plt.savefig(file_path)
+
+    compass_graph_thread = threading.Thread(target=user_interface.set_compass_graph(file_path))
+    compass_graph_thread.start()
+
+    direction = " "
+    if plot_x >= 0 and plot_y >= 0:
+        direction = 'NORTH-EAST'
+
+    elif plot_x < 0 < plot_y:
+        direction = 'NORTH-WEST'
+
+    elif plot_x < 0 and plot_y < 0:
+        direction = 'SOUTH-WEST'
+
+    elif plot_y < 0 < plot_x:
+        direction = 'SOUTH-EAST'
+
+    compass_string = 'The target object is at {0} meters from you, in {1} direction.'.format(round(distance, 2), direction)
+    compass_text_thread = threading.Thread(target=user_interface.set_compass_text(compass_string))
+    compass_text_thread.start()
 
 
 # Configuring the PubNub connection:
@@ -66,57 +120,36 @@ time.sleep(2)
 self_listener = SubscribeListener()
 pubnub.add_listener(self_listener)
 
-fig = plt.figure()
-plt.xlim(-10000, 10000)
-plt.ylim(-10000, 10000)
-plt.axhline(y=0, color='r')
-plt.axvline(x=0, color='r')
-
-plt.xlabel("Distance Units (meters)")
-plt.ylabel("Distance Units (meters)")
-plt.title("Trajectory of the other Device.")
-xdata, ydata = [], []
-graph, = plt.plot([], [], '-')
-
-
-# Render graph with new co-ordinates:
-def animate(x, y):
-    xdata.append(x)
-    ydata.append(y)
-    graph.set_data(xdata, ydata)
-    return graph
-
 
 # Calculating distance between two points using 'Haversine Formula':
 def distance(x1, y1, x2, y2):
-        # This formula calculates the distance "As a crow flies", which is the
-        # shortest distance between two points on a spheroid.
-        # HAVERSINE FORMULA ->
-        # a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)      ---Angle.
-        # c = 2 ⋅ atan2( √a, √(1−a) )                       ---Calculation.
-        # d = Radius ⋅ c                                    ---Distance.
-        #
-        # [ Here, φ is latitude, λ is longitude ]
-        
+    # This formula calculates the distance "As a crow flies", which is the
+    # shortest distance between two points on a spheroid.
+    # HAVERSINE FORMULA ->
+    # a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)      ---Angle.
+    # c = 2 ⋅ atan2( √a, √(1−a) )                       ---Calculation.
+    # d = Radius ⋅ c                                    ---Distance.
+    #
+    # [ Here, φ is latitude, λ is longitude ]
+
     relative_latitude = x2 - x1
     relative_longitude = y2 - y1
-    
+
     a = math.pow(math.sin((relative_latitude / 2) * p), 2) + \
-            math.cos(x2 * p) * math.cos(x1) * math.pow(math.sin((relative_longitude / 2) * p), 2)
+        math.cos(x2 * p) * math.cos(x1) * math.pow(math.sin((relative_longitude / 2) * p), 2)
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     d = radius * c
-    
+
     return d
 
 
 # Function to acquire self location:
-def self_loc()->(float, float):
-
+def self_loc() -> (float, float):
     # Subscribing to the self channel:
     pubnub.subscribe().channels('Self_Loc').execute()
     self_listener.wait_for_connect()
     print('Subscriber configuration : 1/2 completed !')
-    update_status('Subscriber configuration : 1/2 completed !')
+    update_status('Subscriber configuration : Partially completed !')
     print('_______________________')
 
     # Getting current status:
@@ -222,10 +255,9 @@ while True:
         print("plot_lat : " + str(plot_lat))
 
         # Generating graph:
-        ani = FuncAnimation(fig, animate(plot_lat, plot_long), frames=10, interval=200)
-        plt.savefig('graph.png')
-        update_graph('graph.png')
+        update_graph(plot_lat, plot_long, 'graph.png')
+
+        update_compass(plot_lat, plot_long, d, 'compass.png')
 
         # Generating output on LED Grid:
-        send_to_outputter(plot_lat, plot_long)
-
+        #send_to_outputter(plot_lat, plot_long)
