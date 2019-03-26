@@ -78,7 +78,7 @@ class UI:
         self.compass_label.place(x=900, y=300)
         self.compass_label.image = self.original_graph
 
-        Label(self.root, textvariable=self.compass_varianle, font=("Helvetica", 10)).place(x=900, y=600, width=450, height=25)
+        Label(self.root, textvariable=self.compass_varianle, font=("Helvetica", 10)).place(x=850, y=600, width=450, height=25)
 
 
     # Using root.update() method instead of root.mainloop() which is a blocking call:
@@ -126,9 +126,9 @@ class UI:
     def set_compass_graph(self, image):
         new_graph = Image.open(image)
         print("IMAGE : " + image)
+        new_graph.thumbnail((320, 320), Image.ANTIALIAS)
         graph_image = ImageTk.PhotoImage(new_graph)
         self.compass_label.configure(image=graph_image)
         self.compass_label.image = graph_image
         self.render()
-
 
