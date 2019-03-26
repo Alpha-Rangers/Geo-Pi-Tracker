@@ -5,89 +5,88 @@ import time
 import math
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from outputter import generate_output, call_init_sequence, kill_should_run
+from outputter import generate_output
 from ui import UI
 import threading
 
-# defining constants to calculate the distance:
 user_interface = UI()
-init_LED_thread = threading.Thread(target=call_init_sequence())
-init_LED_thread.start()
 
+# defining constants to calculate the distance:
 radius = 6371000
 p = 0.017453292519943295
 latdata, longdata = [], []
 
+xdata, ydata = [], []
+graph, = plt.plot([], [], '-')
+    
+
+# Render graph with new co-ordinates:
+def animate(x, y):
+    xdata.append(x)
+    ydata.append(y)
+    graph.set_data(xdata, ydata)
+    return graph
+
 
 # Function to update status on UI:
 def update_status(stat):
-    status_thread = threading.Thread(target=user_interface.set_status(stat))
-    status_thread.start()
+    user_interface.set_status(stat)
 
 
 # Function to update self location on UI:
 def update_our_loc(self_lat_var, self_long_var):
-    self_loc_thread = threading.Thread(target=user_interface.set_our_location(self_lat_var, self_long_var))
-    self_loc_thread.start()
-
+    user_interface.set_our_location(self_lat_var, self_long_var)
+    
 
 # Function to update remote location on UI:
 def update_remote_loc(remote_lat, remote_long):
-    remote_loc_thread = threading.Thread(target=user_interface.set_remote_location(remote_lat, remote_long))
-    remote_loc_thread.start()
+    user_interface.set_remote_location(remote_lat, remote_long)
 
 
 # Function to update distance on UI:
 def update_distance(distance_var):
-    status_thread = threading.Thread(target=user_interface.set_distance(distance_var))
-    status_thread.start()
+    user_interface.set_distance(distance_var)
 
 
 # Function to send co-ordinates to the outputter file:
 def send_to_outputter(lat, long):
-    output_thread = threading.Thread(target=generate_output(lat, long))
+    output_thread = threading.Thread(target=generate_output, args=[lat, long])
     output_thread.start()
 
 
 # Function to send the graph image to UI:
-def update_graph(plot_x, plot_y, file_path):
-    fig = plt.figure()
-    plt.xlim(-1000, 1000)
-    plt.ylim(-1000, 1000)
+def update_graph(plot_x, plot_y, graph_path):
+
+    fig = plt.figure(1)
+    plt.xlim(-500, 500)
+    plt.ylim(-500, 500)
     plt.axhline(y=0, color='r')
     plt.axvline(x=0, color='r')
 
     plt.xlabel("Distance Units (meters)")
     plt.ylabel("Distance Units (meters)")
     plt.title("Trajectory of the other Device.")
-    xdata, ydata = [], []
-    graph, = plt.plot([], [], '-')
-
-    # Render graph with new co-ordinates:
-    def animate(x, y):
-        xdata.append(x)
-        ydata.append(y)
-        graph.set_data(xdata, ydata)
-        return graph
-
+    
     ani = FuncAnimation(fig, animate(plot_x, plot_y), frames=10, interval=200)
-    plt.savefig('graph.png')
+    plt.savefig(graph_path)
 
-    graph_thread = threading.Thread(target=user_interface.set_graph(file_path))
+    graph_thread = threading.Thread(target=user_interface.set_graph(graph_path))
     graph_thread.start()
 
 
 # Function to send the compass details to UI:
-def update_compass(plot_x, plot_y, distance, file_path):
+def update_compass(plot_x, plot_y, distance, compass_path):
+
     compass = plt.figure()
-    plt.xlim(-1000, 1000)
-    plt.ylim(-1000, 1000)
+    plt.xlim(-500, 500)
+    plt.ylim(-500, 500)
     plt.axhline(y=0, color='r')
     plt.axvline(x=0, color='r')
     plt.arrow(0, 0, plot_x, plot_y)
-    plt.savefig(file_path)
+    #plt.plot([0, plot_x], [0, plot_y], color = 'b')
+    plt.savefig(compass_path)
 
-    compass_graph_thread = threading.Thread(target=user_interface.set_compass_graph(file_path))
+    compass_graph_thread = threading.Thread(target=user_interface.set_compass_graph(compass_path))
     compass_graph_thread.start()
 
     direction = " "
@@ -103,8 +102,7 @@ def update_compass(plot_x, plot_y, distance, file_path):
     elif plot_y < 0 < plot_x:
         direction = 'SOUTH-EAST'
 
-    compass_string = 'The target object is at {0} meters from you, in {1} direction.'.format(round(distance, 2),
-                                                                                             direction)
+    compass_string = 'The target object is at {0} meters from you, in {1} direction.'.format(round(distance, 2), direction)
     compass_text_thread = threading.Thread(target=user_interface.set_compass_text(compass_string))
     compass_text_thread.start()
 
@@ -115,7 +113,6 @@ pnconfig.publish_key = "pub-c-29e0c45e-724c-42ba-be7b-cb156fc74a03"
 pnconfig.subscribe_key = "sub-c-f739ed7a-2afb-11e9-8c30-16f8bea0bbad"
 pnconfig.ssl = False
 pubnub = PubNub(pnconfig)
-print("Connecting to PubNub MQTT Broker Service")
 update_status("Connecting to PubNub MQTT Broker Service")
 time.sleep(2)
 
@@ -151,17 +148,14 @@ def self_loc() -> (float, float):
     # Subscribing to the self channel:
     pubnub.subscribe().channels('Self_Loc').execute()
     self_listener.wait_for_connect()
-    print('Subscriber configuration : 1/2 completed !')
     update_status('Subscriber configuration : Partially completed !')
-    print('_______________________')
 
     # Getting current status:
     while True:
         self_result = self_listener.wait_for_message_on('Self_Loc')
-        self_result_message: str = repr(self_result.message)
+        self_result_message = repr(self_result.message)
 
         if self_result.message == str('Connected !'):
-            print('Receiving Location Data ...')
             update_status('Receiving Location Data ...')
             break
 
@@ -172,7 +166,7 @@ def self_loc() -> (float, float):
 
     # Getting current location:
     self_result = self_listener.wait_for_message_on('Self_Loc')
-    self_result_message: str = repr(self_result.message)
+    self_result_message = repr(self_result.message)
 
     # Filtering the lat-long from received message:
     self_result_loc = self_result_message.split('_')
@@ -191,11 +185,7 @@ remote_listener = SubscribeListener()
 pubnub.add_listener(remote_listener)
 pubnub.subscribe().channels('ESIoT').execute()
 remote_listener.wait_for_connect()
-print('Subscriber Configured !')
 update_status('Subscriber Configured !')
-print('_______________________')
-
-kill_should_run()
 
 # Making the script run continuously:
 while True:
@@ -210,10 +200,7 @@ while True:
 
     # Waiting for connection:
     if result.message == str("Connected !"):
-        print("\nRemote device calibrated and ready for transmission !")
         update_status('Remote device calibrated and ready for transmission !')
-
-        print("_______________________________________________________")
 
     else:
         # Filtering the lat-long from received message:
@@ -261,6 +248,7 @@ while True:
 
         # Generating graph:
         update_graph(plot_lat, plot_long, 'graph.png')
+        time.sleep(1)
 
         update_compass(plot_lat, plot_long, d, 'compass.png')
 
