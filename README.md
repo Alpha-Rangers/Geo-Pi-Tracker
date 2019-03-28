@@ -41,9 +41,9 @@ Access the [PubNub account](https://admin.pubnub.com/#/user/485567/account/48552
 
 Matplotlib will be used to plot the real-time location of the second Raspi on the graph.
 
-Pydroid is used to run Python scripts on Android, which will use the device's gps location and transmitt it back to Raspberry Pis
+Pydroid is used to run Python scripts on Android, which will use the device's gps location and transmit it back to Raspberry Pis
 
 The [Haversine Formula](http://www.movable-type.co.uk/scripts/latlong.html) is used to calculate the distance between the two points in meters.
 
 
-[Find more details about the project.](https://docs.google.com/document/d/1KCYRFPLAYCFK_cW10q42ZrTNj4GCa3kxpJBWMFR7w-s/edit?usp=sharing)
+[More details about the project.](https://docs.google.com/document/d/1KCYRFPLAYCFK_cW10q42ZrTNj4GCa3kxpJBWMFR7w-s/edit?usp=sharing)
