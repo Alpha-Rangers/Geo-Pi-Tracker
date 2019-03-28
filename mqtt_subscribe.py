@@ -5,7 +5,7 @@ import time
 import math
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from outputter import generate_output
+from outputter import generate_output, kill_grid
 from ui import UI
 import threading
 
@@ -50,6 +50,8 @@ def update_distance(distance_var):
 
 # Function to send co-ordinates to the outputter file:
 def send_to_outputter(lat, long):
+    kill_grid.set()
+    time.sleep(0.5)
     output_thread = threading.Thread(target=generate_output, args=[lat, long])
     output_thread.start()
 
@@ -70,8 +72,7 @@ def update_graph(plot_x, plot_y, graph_path):
     ani = FuncAnimation(fig, animate(plot_x, plot_y), frames=10, interval=200)
     plt.savefig(graph_path)
 
-    graph_thread = threading.Thread(target=user_interface.set_graph(graph_path))
-    graph_thread.start()
+    user_interface.set_graph(graph_path)
 
 
 # Function to send the compass details to UI:
@@ -86,8 +87,7 @@ def update_compass(plot_x, plot_y, distance, compass_path):
     #plt.plot([0, plot_x], [0, plot_y], color = 'b')
     plt.savefig(compass_path)
 
-    compass_graph_thread = threading.Thread(target=user_interface.set_compass_graph(compass_path))
-    compass_graph_thread.start()
+    user_interface.set_compass_graph(compass_path)
 
     direction = " "
     if plot_x >= 0 and plot_y >= 0:
@@ -103,8 +103,7 @@ def update_compass(plot_x, plot_y, distance, compass_path):
         direction = 'SOUTH-EAST'
 
     compass_string = 'The target object is at {0} meters from you, in {1} direction.'.format(round(distance, 2), direction)
-    compass_text_thread = threading.Thread(target=user_interface.set_compass_text(compass_string))
-    compass_text_thread.start()
+    user_interface.set_compass_text(compass_string)
 
 
 # Configuring the PubNub connection:
@@ -222,9 +221,6 @@ while True:
         print("relative lat : " + str(relative_lat))
         print("relative long : " + str(relative_long))
 
-        latdata.append(relative_lat)
-        longdata.append(relative_long)
-
         # Calculating distance between the two points:
         d = distance(self_lat, self_long, result_lat, result_long)
 
@@ -232,16 +228,20 @@ while True:
         print("_______________________")
         update_distance(d)
 
+        
         # Calculating points on graph based on distance:
         plot_lat = distance(self_lat, 0, result_lat, 0)
         plot_long = distance(self_long, 0, result_long, 0)
 
         # Calculating relative location:
-        if relative_lat < 0:
+        if relative_lat > 0:
             plot_lat = 0 - plot_lat
 
-        if relative_long < 0:
+        if relative_long > 0:
             plot_long = 0 - plot_long
+
+        latdata.append(plot_lat)
+        longdata.append(plot_long)
 
         print("plot_long : " + str(plot_long))
         print("plot_lat : " + str(plot_lat))
