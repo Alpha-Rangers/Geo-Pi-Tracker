@@ -5,10 +5,11 @@ import time
 import math
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from outputter import generate_output, kill_grid
+from outputter import generate_output, kill_grid, kill_init
 from ui import UI
 import threading
 
+# Rendering UI skeleton:
 user_interface = UI()
 
 # defining constants to calculate the distance:
@@ -185,6 +186,10 @@ pubnub.add_listener(remote_listener)
 pubnub.subscribe().channels('ESIoT').execute()
 remote_listener.wait_for_connect()
 update_status('Subscriber Configured !')
+
+# Killing the initial sequence:
+kill_grid.set()
+time.sleep(0.5)
 
 # Making the script run continuously:
 while True:
